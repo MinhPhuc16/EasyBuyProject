@@ -5,7 +5,7 @@ import {logoutUser} from '../../api/auth';
 export default function OptionsScreen() {
   return (
     <View style={styles.container}>
-      <Text> Hello </Text>
+      <Text> Dit me thang An </Text>
       <TouchableOpacity onPress={logoutUser}>
         <Text>LogOut</Text>
       </TouchableOpacity>
