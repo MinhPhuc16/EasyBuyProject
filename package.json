@@ -25,6 +25,7 @@
     "react-native": "0.64.1",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.36.2",
+    "react-native-option-picker": "^1.1.2",
     "react-native-paper": "^4.9.1",
     "react-native-radio-buttons-group": "^2.2.4",
     "react-native-reanimated": "^2.2.0",
