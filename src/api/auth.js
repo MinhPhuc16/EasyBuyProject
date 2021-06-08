@@ -48,3 +48,50 @@ export const sendEmailWithPassword = async email => {
     };
   }
 };
+
+export const saveShippingAddress = async (payload, isEdit, index) => {
+  try {
+    const userRef = firebase
+      .firestore()
+      .collection('users')
+      .doc(firebase.auth().currentUser.uid);
+    const userSnap = await userRef.get();
+    const userData = userSnap.data();
+
+    if (isEdit) {
+      userData.shippingAddresses[index] = payload;
+      userRef
+        .set(
+          {
+            shippingAddresses: userData.shippingAddresses,
+          },
+          {merge: true},
+        )
+        .catch(error => {
+          console.log(
+            'Something went wrong with added shipping address to firestore: ',
+            error,
+          );
+        });
+    } else {
+      userData.shippingAddresses.push({
+        ...payload,
+      });
+      userRef
+        .set(
+          {
+            shippingAddresses: userData.shippingAddresses,
+          },
+          {merge: true},
+        )
+        .catch(error => {
+          console.log(
+            'Something went wrong with added shipping address to firestore: ',
+            error,
+          );
+        });
+    }
+  } catch (error) {
+    console.log('saveShippingAddress error', error);
+  }
+};
