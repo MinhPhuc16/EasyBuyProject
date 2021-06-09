@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
-import {CustomText} from '../../components/CustomText';
+import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {COLORS} from '../style/colors';
 import {theme} from '../../common/theme';
 
@@ -20,27 +19,27 @@ export const AddressCard = ({
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <CustomText weight="medium">{fullName}</CustomText>
+        <Text>{fullName}</Text>
 
         {isInCheckout ? (
           <TouchableOpacity onPress={changePressHandler}>
-            <CustomText style={styles.edit} weight="bold">
+            <Text style={styles.edit} weight="bold">
               Change{' '}
-            </CustomText>
+            </Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={editPressHandler}>
-            <CustomText style={styles.edit} weight="bold">
+            <Text style={styles.edit} weight="bold">
               Edit
-            </CustomText>
+            </Text>
           </TouchableOpacity>
         )}
       </View>
 
-      <CustomText>{address}</CustomText>
-      <CustomText>
+      <Text>{address}</Text>
+      <Text>
         {city}, {state} {zipCode}, {country}
-      </CustomText>
+      </Text>
       {isInCheckout ? null : (
         <TouchableOpacity style={styles.checkboxWrapper} onPress={onPress}>
           <View
@@ -52,7 +51,7 @@ export const AddressCard = ({
                 borderWidth: isSelected ? null : 2,
               },
             ]}></View>
-          <CustomText>Use as the shipping address</CustomText>
+          <Text>Use as the shipping address</Text>
         </TouchableOpacity>
       )}
     </View>

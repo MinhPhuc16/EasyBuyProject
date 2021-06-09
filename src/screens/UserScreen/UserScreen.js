@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 
 import {theme} from '../../common/theme';
-import {CustomText} from '../../components/CustomText';
 import {logoutUser} from '../../api/auth';
 import {connect} from 'react-redux';
 import {getCurrentUserData, selectUserData} from '../../store/users';
@@ -20,7 +19,7 @@ const mapStateToProps = state => ({
   product: selectCurrentProduct(state),
 });
 
-export const ProfileScreen = connect(mapStateToProps, {
+const ProfileScreen = connect(mapStateToProps, {
   getCurrentUserData,
   logoutUser,
 })(({getCurrentUserData, navigation, user}) => {
@@ -62,9 +61,9 @@ export const ProfileScreen = connect(mapStateToProps, {
     <View style={styles.container}>
       <StatusBar />
       <View style={styles.logoutWrapper}>
-        <CustomText weight={'bold'} style={styles.title}>
+        <Text weight={'bold'} style={styles.title}>
           My Profile
-        </CustomText>
+        </Text>
       </View>
       <View style={styles.userInfoSection}>
         <Image
@@ -72,12 +71,12 @@ export const ProfileScreen = connect(mapStateToProps, {
           source={require('../../assets/images/Rose_2.png')}
         />
         <View style={styles.text}>
-          <CustomText weight={'bold'} style={styles.name}>
+          <Text weight={'bold'} style={styles.name}>
             {user.username}
-          </CustomText>
-          <CustomText weight={'medium'} style={styles.email}>
+          </Text>
+          <Text weight={'medium'} style={styles.email}>
             {user.email}
-          </CustomText>
+          </Text>
         </View>
       </View>
       <FlatList
@@ -88,12 +87,10 @@ export const ProfileScreen = connect(mapStateToProps, {
             key={`${item.sectionName}`}
             onPress={() => navigation.navigate(item.screenTo)}>
             <View style={styles.text}>
-              <CustomText weight={'bold'} style={styles.sectionName}>
+              <Text weight={'bold'} style={styles.sectionName}>
                 {item.sectionName}
-              </CustomText>
-              <CustomText style={styles.sectionDesc}>
-                {item.dutyOfSection}
-              </CustomText>
+              </Text>
+              <Text style={styles.sectionDesc}>{item.dutyOfSection}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -174,3 +171,5 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
 });
+
+export default ProfileScreen;

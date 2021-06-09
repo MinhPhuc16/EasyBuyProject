@@ -1,7 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, StatusBar, FlatList, ScrollView} from 'react-native';
-import {COLORS} from '../../style/colors';
-import {CustomText} from '../../components/CustomText';
+import {
+  StyleSheet,
+  View,
+  StatusBar,
+  FlatList,
+  ScrollView,
+  Text,
+} from 'react-native';
 import {Btn} from '../../components/Btn';
 import {ProductCard} from '../../components/ProductCard';
 import {GLOBAL_STYLES} from '../../common/globalStyles';
@@ -43,23 +48,17 @@ export const OrderDetails = ({navigation, route}) => {
       <StatusBar />
       <ScrollView>
         <View style={styles.header}>
-          <CustomText weight={'medium'} style={styles.orderNo}>
-            Order №{orderNo}
-          </CustomText>
-          <CustomText style={styles.date}>{date}</CustomText>
+          <Text style={styles.orderNo}>Order №{orderNo}</Text>
+          <Text style={styles.date}>{date}</Text>
         </View>
         <View style={[styles.header, {justifyContent: 'flex-start'}]}>
-          <CustomText style={styles.date}>Tracking number:</CustomText>
-          <CustomText weight={'medium'} style={styles.orderNo}>
-            {trackingNo}
-          </CustomText>
+          <Text style={styles.date}>Tracking number:</Text>
+          <Text style={styles.orderNo}>{trackingNo}</Text>
         </View>
 
         <View style={styles.header}>
-          <CustomText weight={'medium'} style={styles.orderNo}>
-            {quantity} items
-          </CustomText>
-          <CustomText style={styles.status}>Delivered</CustomText>
+          <Text style={styles.orderNo}>{quantity} items</Text>
+          <Text style={styles.status}>Delivered</Text>
         </View>
         <View style={styles.cards}>
           <FlatList
@@ -76,19 +75,15 @@ export const OrderDetails = ({navigation, route}) => {
             keyExtractor={item => `${item.id - item.color}`}
           />
         </View>
-        <CustomText weight={'medium'} style={styles.orderInfoTitle}>
-          Order Information
-        </CustomText>
+        <Text style={styles.orderInfoTitle}>Order Information</Text>
         {orderInfo.map(item => (
           <View
             style={[styles.header, {justifyContent: 'flex-start'}]}
             key={item.infoText}>
             <View style={{width: 152}}>
-              <CustomText style={styles.date}>{item.infoTitle}</CustomText>
+              <Text style={styles.date}>{item.infoTitle}</Text>
             </View>
-            <CustomText weight={'medium'} style={styles.orderNo}>
-              {item.infoText}
-            </CustomText>
+            <Text style={styles.orderNo}>{item.infoText}</Text>
           </View>
         ))}
 

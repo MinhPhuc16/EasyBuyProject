@@ -9,17 +9,20 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert,
+  Text,
 } from 'react-native';
 import {SizeContainer} from '../../components/SizeContainer';
-import {CustomText} from '../../components/CustomText';
 import {GLOBAL_STYLES} from '../../common/globalStyles';
 import {BottomModal} from '../../components/bottomModal';
 import StarRating from 'react-native-star-rating';
-import {averageRatingCalc, totalRatingCalc} from '../Utils/Calculations';
+import {
+  averageRatingCalc,
+  totalRatingCalc,
+} from '../../components/Calculations';
 import {getCurrentProduct} from '../../store/products';
 import {connect} from 'react-redux';
 import {Btn} from '../components/Btn';
-import {addProductToUsersBag} from '../API';
+import {addProductToUsersBag} from '../../api/auth';
 
 export const SingleProductScreen = connect(null, {
   addProductToUsersBag,
@@ -28,18 +31,8 @@ export const SingleProductScreen = connect(null, {
   useEffect(() => {
     handleGetCurrentProduct();
   }, []);
-  const {
-    id,
-    about,
-    brandName,
-    price,
-    imagesUrls,
-    name,
-    rating,
-    colors,
-    count,
-    onSale,
-  } = route.params.product;
+  const {id, about, price, imagesUrls, name, rating, colors, count, onSale} =
+    route.params.product;
   const [isSizeClicked, setIsSizeClicked] = useState(false);
   const [isColorClicked, setIsColorClicked] = useState(false);
   const [isHeartClicked, setIsHeartClicked] = useState(false);
@@ -114,7 +107,7 @@ export const SingleProductScreen = connect(null, {
           resizeMode="contain"
           sliderBoxHeight={340}
           circleLoop={true}
-          dotColor={COLORS.PRIMARY}
+          dotColor={theme.colors.primary}
         />
         <View style={styles.main}>
           <View style={styles.firstRow}>
@@ -123,7 +116,7 @@ export const SingleProductScreen = connect(null, {
               name={addProduct.size ? addProduct.size : 'Size'}
               onPress={() => setIsSizeClicked(!isSizeClicked)}
               isClicked={isSizeClicked}
-              bgColor={addProduct.size ? COLORS.PRIMARY : null}
+              bgColor={addProduct.size ? theme.colors.primary : null}
               borderWidth={addProduct.size ? 0 : 0.4}
             />
             <SizeContainer
@@ -146,11 +139,8 @@ export const SingleProductScreen = connect(null, {
           </View>
 
           <View style={styles.row}>
-            <CustomText style={styles.bigText} weight="bold">
-              {brandName}
-            </CustomText>
             <View style={styles.priceRow}>
-              <CustomText
+              <Text
                 style={{
                   ...styles.bigText,
                   ...{
@@ -162,44 +152,42 @@ export const SingleProductScreen = connect(null, {
                 }}
                 weight="bold">
                 {`${price}$`}
-              </CustomText>
+              </Text>
               {onSale !== undefined && onSale.discount !== undefined ? (
-                <CustomText
+                <Text
                   style={{
                     ...styles.bigText,
-                    ...{color: COLORS.SALE, marginLeft: 10},
+                    ...{color: theme.colors.SALE, marginLeft: 10},
                   }}
                   weight="bold">
                   {`${salePrice}$`}
-                </CustomText>
+                </Text>
               ) : null}
             </View>
           </View>
-          <CustomText style={styles.clothName}>{name}</CustomText>
+          <Text style={styles.clothName}>{name}</Text>
           <TouchableOpacity
             style={styles.ratingRow}
             onPress={() =>
-              navigation.navigate('Rating', {
+              navigation.navigate('RatingReviewScreen', {
                 productID: id,
               })
             }>
             <StarRating
               disabled={true}
-              fullStarColor={COLORS.STAR}
+              fullStarColor={theme.colors.STAR}
               starSize={14}
               starStyle={{margin: 3}}
               containerStyle={{marginTop: 8, width: 80}}
               maxStars={5}
               rating={averageRatingCalc(rating)}
             />
-            <CustomText style={styles.ratingCount}>
-              ({totalRatingCalc(rating)})
-            </CustomText>
+            <Text style={styles.ratingCount}>({totalRatingCalc(rating)})</Text>
           </TouchableOpacity>
-          <CustomText style={styles.descText}>{about}</CustomText>
-          <CustomText style={styles.suggestionText} weight="bold">
+          <Text style={styles.descText}>{about}</Text>
+          <Text style={styles.suggestionText} weight="bold">
             You can also like this
-          </CustomText>
+          </Text>
           {products.length !== 1 ? (
             <FlatList
               data={products}
@@ -212,7 +200,7 @@ export const SingleProductScreen = connect(null, {
                       product={item}
                       isRowView={false}
                       onPress={() =>
-                        navigation.navigate('SingleProduct', {
+                        navigation.navigate('SingleProductScreen', {
                           product: item,
                           products: products,
                         })
@@ -224,9 +212,7 @@ export const SingleProductScreen = connect(null, {
               keyExtractor={item => item.id}
             />
           ) : (
-            <CustomText>
-              Similar products to this item will be available soon!
-            </CustomText>
+            <Text>Similar products to this item will be available soon!</Text>
           )}
         </View>
       </ScrollView>
@@ -257,7 +243,7 @@ export const SingleProductScreen = connect(null, {
       <Btn
         height={50}
         width={Dimensions.get('window').width - 32}
-        bgColor={COLORS.PRIMARY}
+        bgColor={theme.colors.primary}
         btnName="ADD TO CART"
         containerStyle={{marginHorizontal: 16}}
         onPress={() => {
@@ -271,7 +257,7 @@ export const SingleProductScreen = connect(null, {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.BACKGROUND,
+    backgroundColor: theme.colors.BACKGROUND,
   },
   main: {
     paddingHorizontal: GLOBAL_STYLES.PADDING,
@@ -295,7 +281,7 @@ const styles = StyleSheet.create({
   },
   typeText: {
     fontSize: 11,
-    color: COLORS.GRAY,
+    color: theme.colors.GRAY,
   },
   descText: {
     fontSize: 14,
@@ -307,10 +293,10 @@ const styles = StyleSheet.create({
 
   clothName: {
     fontSize: 11,
-    color: COLORS.GRAY,
+    color: theme.colors.GRAY,
   },
   ratingCount: {
-    color: COLORS.GRAY,
+    color: theme.colors.GRAY,
     marginTop: 10,
     marginLeft: 15,
   },

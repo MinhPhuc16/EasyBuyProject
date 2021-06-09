@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {CustomText} from '../components/CustomText';
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 export const Btn = ({
   btnName,
@@ -29,9 +28,9 @@ export const Btn = ({
       ]}
       onPress={onPress}
       rest={rest}>
-      <CustomText weight={'medium'} style={{...styles.btnText, ...titleStyle}}>
+      <Text weight={'medium'} style={{...styles.btnText, ...titleStyle}}>
         {btnName}
-      </CustomText>
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -25,6 +25,7 @@
     "react-native": "0.64.1",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.36.2",
+    "react-native-image-slider-box": "^1.0.12",
     "react-native-option-picker": "^1.1.2",
     "react-native-paper": "^4.9.1",
     "react-native-radio-buttons-group": "^2.2.4",
@@ -32,10 +33,12 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.3.0",
     "react-native-simple-radio-button": "^2.7.4",
+    "react-native-star-rating": "^1.1.0",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-vector-icons": "^8.1.0",
     "react-redux": "^7.2.4",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "typeface-metropolis": "^1.1.13"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

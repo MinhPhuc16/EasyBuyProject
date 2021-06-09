@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Image, ScrollView, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  ScrollView,
+  FlatList,
+  Text,
+} from 'react-native';
 import {connect} from 'react-redux';
-import {Btn} from '../components/Btn';
-import {CustomText} from '../components/CustomText';
-import {getCurrentUserData} from '../store/users';
-import {ProductCard} from '../components/ProductCard';
+import {Btn} from '../../components/Btn';
+import {getCurrentUserData} from '../../store/users';
+import {ProductCard} from '../../components/ProductCard';
 import {
   selectSaleProductData,
   getOnSaleProducts,
@@ -70,12 +76,10 @@ const Home = connect(mapStateToProps, {
           <>
             <Image source={banner} style={{width: '100%', height: 196}} />
             <View style={styles.newItemsWrap}>
-              <CustomText style={styles.categoryTitle} weight="bold">
+              <Text style={styles.categoryTitle} weight="bold">
                 Sale
-              </CustomText>
-              <CustomText style={styles.description}>
-                Super Summer Sale
-              </CustomText>
+              </Text>
+              <Text style={styles.description}>Super Summer Sale</Text>
               <FlatList
                 horizontal
                 contentContainerStyle={{
@@ -105,13 +109,11 @@ const Home = connect(mapStateToProps, {
         ) : (
           <View style={styles.imageWrapper}>
             <Image source={homeImage} style={{width: '100%', height: 480}} />
-            <CustomText style={styles.title} weight="bold">
-              Fashion sale
-            </CustomText>
+            <Text style={styles.title}>Fashion sale</Text>
             <View style={styles.btn}>
               <Btn
                 btnName="Check"
-                bgColor={COLORS.PRIMARY}
+                bgColor={theme.colors.primary}
                 height={36}
                 width={160}
                 onPress={() => handleOnSaleProducts()}
@@ -120,12 +122,8 @@ const Home = connect(mapStateToProps, {
           </View>
         )}
         <View style={styles.newItemsWrap}>
-          <CustomText style={styles.categoryTitle} weight="bold">
-            New
-          </CustomText>
-          <CustomText style={styles.description}>
-            You've never seen it before
-          </CustomText>
+          <Text style={styles.categoryTitle}>New</Text>
+          <Text style={styles.description}>You've never seen it before</Text>
 
           <FlatList
             horizontal

@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
-import {CustomText} from './CustomText';
+import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 export const SizeContainer = ({width, name, onPress, bgColor, borderWidth}) => {
   return (
@@ -10,7 +9,7 @@ export const SizeContainer = ({width, name, onPress, bgColor, borderWidth}) => {
         {width: width, backgroundColor: bgColor, borderWidth: borderWidth},
       ]}
       onPress={onPress}>
-      <CustomText style={styles.containerText}>{name}</CustomText>
+      <Text style={styles.containerText}>{name}</Text>
     </TouchableOpacity>
   );
 };

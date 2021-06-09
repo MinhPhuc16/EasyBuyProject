@@ -1,7 +1,10 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-
-import {getData, getOnSaleData, getDataByCategoryGenderAndFilter} from '../API';
+import firebase from '@react-native-firebase/app';
+import firestore from '@react-native-firebase/firestore';
+import {
+  getData,
+  getOnSaleData,
+  getDataByCategoryGenderAndFilter,
+} from '../api/auth';
 
 const SET_APP_PRODUCTS = 'SET_APP_PRODUCTS';
 const SET_APP_SALE_PRODUCTS = 'SET_APP_SALE_PRODUCTS';

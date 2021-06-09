@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View, Text} from 'react-native';
 import {theme} from '../common/theme';
-import {CustomText} from './CustomText';
 
 export const Input = ({
   name,
@@ -13,7 +12,7 @@ export const Input = ({
 }) => {
   return (
     <View style={styles.inputContainer}>
-      <CustomText style={styles.inputLabel}>{name}</CustomText>
+      <Text style={styles.inputLabel}>{name}</Text>
       <TextInput
         secureTextEntry={secureTextEntry}
         weight={'medium'}

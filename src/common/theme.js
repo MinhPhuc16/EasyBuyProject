@@ -14,6 +14,6 @@ export const theme = {
     STAR: '#FFBA49',
     DARK: '#2A2C36',
     GRAY: '#ABB4BD',
-    BACKGROUND: '#1E1F28',
+    BACKGROUND: '#FFFFFF',
   },
 };

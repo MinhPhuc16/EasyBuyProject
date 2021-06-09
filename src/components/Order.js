@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import {theme} from '../../common/theme';
-import {CustomText} from '../components/CustomText';
 import {Btn} from '../components/Btn';
 
 export const Order = ({
@@ -15,29 +14,29 @@ export const Order = ({
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.firstPart}>
-        <CustomText weight={'medium'} style={styles.orderNo}>
+        <Text weight={'medium'} style={styles.orderNo}>
           Order №{orderNo}
-        </CustomText>
-        <CustomText style={styles.date}>{date}</CustomText>
+        </Text>
+        <Text style={styles.date}>{date}</Text>
       </View>
       <View style={[styles.firstPart, {justifyContent: 'flex-start'}]}>
-        <CustomText style={styles.date}>Tracking number:</CustomText>
-        <CustomText weight={'medium'} style={styles.orderNo}>
+        <Text style={styles.date}>Tracking number:</Text>
+        <Text weight={'medium'} style={styles.orderNo}>
           {trackingNo}
-        </CustomText>
+        </Text>
       </View>
       <View style={styles.firstPart}>
         <View style={[styles.firstPart, {justifyContent: 'flex-start'}]}>
-          <CustomText style={styles.date}>Quantity:</CustomText>
-          <CustomText weight={'medium'} style={styles.orderNo}>
+          <Text style={styles.date}>Quantity:</Text>
+          <Text weight={'medium'} style={styles.orderNo}>
             {quantity}
-          </CustomText>
+          </Text>
         </View>
         <View style={[styles.firstPart, {justifyContent: 'flex-start'}]}>
-          <CustomText style={styles.date}>Total Amount:</CustomText>
-          <CustomText weight={'medium'} style={styles.orderNo}>
+          <Text style={styles.date}>Total Amount:</Text>
+          <Text weight={'medium'} style={styles.orderNo}>
             {Math.floor(total)}$
-          </CustomText>
+          </Text>
         </View>
       </View>
       <View style={styles.firstPart}>
@@ -49,7 +48,7 @@ export const Order = ({
           btnName={'Details'}
           onPress={onPress}
         />
-        <CustomText style={styles.status}>Delivered</CustomText>
+        <Text style={styles.status}>Delivered</Text>
       </View>
     </TouchableOpacity>
   );

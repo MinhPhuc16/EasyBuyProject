@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Image, TextInput} from 'react-native';
-import {CustomText} from '../../components/CustomText';
+import {View, StyleSheet, Image, TextInput, Text} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import {theme} from '../../common/theme';
 
@@ -22,9 +21,9 @@ export const ReviewItem = ({
           uri: userImg,
         }}
       />
-      <CustomText style={styles.username} weight="medium">
+      <Text style={styles.username} weight="medium">
         {username}
-      </CustomText>
+      </Text>
       <View style={styles.row}>
         <StarRating
           disabled={true}
@@ -34,9 +33,9 @@ export const ReviewItem = ({
           maxStars={5}
           rating={rating}
         />
-        <CustomText style={styles.date}>
+        <Text style={styles.date}>
           {date} - {month} - {year}
-        </CustomText>
+        </Text>
       </View>
 
       <TextInput placeholder="Write your comment here" />
@@ -72,6 +71,6 @@ const styles = StyleSheet.create({
 
   date: {
     fontSize: 11,
-    color: COLORS.GRAY,
+    color: theme.colors.GRAY,
   },
 });

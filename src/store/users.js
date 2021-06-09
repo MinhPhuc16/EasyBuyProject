@@ -1,5 +1,5 @@
-import * as firebase from 'firebase';
-import 'firebase/firestore';
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/firestore';
 
 export const MODULE_NAME = 'users';
 export const selectUserData = state => state[MODULE_NAME].usersData;
