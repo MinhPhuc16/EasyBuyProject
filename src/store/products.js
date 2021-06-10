@@ -23,8 +23,6 @@ export const selectFilteredProducts = state =>
 export const selectCurrentProduct = state => state[MODULE_NAME].currentProduct;
 export const selectCurrentProductRating = state =>
   state[MODULE_NAME].currentProduct.rating;
-export const selectCategory = (state, category) =>
-  state[MODULE_NAME].allProducts[category];
 export const selectIsModalOpen = state => state[MODULE_NAME].isModalOpen;
 
 const initialState = {
@@ -149,7 +147,6 @@ export const getCurrentProduct = productID => async dispatch => {
 export const getFilteredProducts = payload => async dispatch => {
   try {
     const filteredProducts = await getDataByCategoryGenderAndFilter(
-      payload.category,
       payload.gender,
       payload.isSortClicked,
       payload.sortType,

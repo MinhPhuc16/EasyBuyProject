@@ -37,24 +37,19 @@ const ProfileScreen = connect(mapStateToProps, {
 
   const profileSections = [
     {
-      sectionName: 'My Orders',
+      sectionName: 'MyOrders',
       dutyOfSection: `Already have ${user.orders.length} orders`,
       screenTo: 'MyOrders',
     },
     {
-      sectionName: 'Shipping addresses',
+      sectionName: 'ShippingAddressesScreen',
       dutyOfSection: `${(user.shippingAddresses || []).length} addresses`,
       screenTo: 'ShippingAddressesScreen',
     },
     {
-      sectionName: 'Payment methods',
+      sectionName: 'PaymentMethodsScreen',
       dutyOfSection: `${(user.paymentMethods || []).length} payment methods `,
-      screenTo: 'PaymentMethods',
-    },
-    {
-      sectionName: 'Settings',
-      dutyOfSection: 'Change photo and username',
-      screenTo: 'Settings',
+      screenTo: 'PaymentMethodsScreen',
     },
   ];
   return (

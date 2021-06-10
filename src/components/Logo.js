@@ -4,14 +4,19 @@ import {theme} from '../common/theme';
 
 export default function Logo() {
   return (
-    <Image
-      source={require('../assets/images/Group_3.png')}
-      resizeMode="repeat"
-      style={styles.background}></Image>
+    <View style={styles.container}>
+      <Image
+        source={require('../assets/images/Group_3.png')}
+        resizeMode="repeat"
+        style={styles.background}></Image>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   background: {
     width: '100%',
     height: '42%',

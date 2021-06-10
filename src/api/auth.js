@@ -425,3 +425,39 @@ export const getDataByCategoryGenderAndFilter = async (
   }
   return products;
 };
+export const selectShippingAddress = async pressedIndex => {
+  try {
+    const userRef = firebase
+      .firestore()
+      .collection('users')
+      .doc(firebase.auth().currentUser.uid);
+
+    const userSnap = await userRef.get();
+    const userData = userSnap.data();
+
+    userData.shippingAddresses.map((address, index) => {
+      if (index === pressedIndex) {
+        address.isSelected = true;
+      } else {
+        address.isSelected = false;
+      }
+    });
+
+    userRef
+      .set(
+        {
+          shippingAddresses: userData.shippingAddresses,
+        },
+
+        {merge: true},
+      )
+      .catch(error => {
+        console.log(
+          'Something went wrong with a selectShippingAddressto firestore: ',
+          error,
+        );
+      });
+  } catch (error) {
+    console.log('selectShippingAddress error', error);
+  }
+};

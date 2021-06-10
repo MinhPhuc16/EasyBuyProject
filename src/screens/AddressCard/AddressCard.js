@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
-import {COLORS} from '../style/colors';
 import {theme} from '../../common/theme';
 
 export const AddressCard = ({

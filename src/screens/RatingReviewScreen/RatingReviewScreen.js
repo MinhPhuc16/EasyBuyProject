@@ -21,9 +21,7 @@ export const ReviewItem = ({
           uri: userImg,
         }}
       />
-      <Text style={styles.username} weight="medium">
-        {username}
-      </Text>
+      <Text style={styles.username}>{username}</Text>
       <View style={styles.row}>
         <StarRating
           disabled={true}

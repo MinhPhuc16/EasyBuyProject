@@ -1,150 +1,148 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  StatusBar,
-  FlatList,
-  ScrollView,
-  Text,
-} from 'react-native';
-import {Btn} from '../../components/Btn';
-import {ProductCard} from '../../components/ProductCard';
-import {GLOBAL_STYLES} from '../../common/globalStyles';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, StatusBar, FlatList, Text} from 'react-native';
 import {theme} from '../../common/theme';
+import {Btn} from '../../components/Btn';
+import {Order} from '../../components/Order';
+import {GLOBAL_STYLES} from '../../common/globalStyles';
+import {getCurrentUserData, selectUserData} from '../../store/users';
+import {connect} from 'react-redux';
 
-export const OrderDetails = ({navigation, route}) => {
-  const {
-    quantity,
-    trackingNo,
-    orderNo,
-    date,
-    total,
-    orderedProducts,
-    deliveryMethod,
-    paymentMethod,
-  } = route.params;
+const mapStateToProps = state => ({
+  usersData: selectUserData(state),
+});
 
-  const orderInfo = [
-    {
-      infoTitle: 'Payment method:',
-      infoText: `**** **** **** ${paymentMethod.cardNumber.slice(15, 19)}`,
-    },
-    {
-      infoTitle: 'Delivery method:',
-      infoText: `${deliveryMethod.deliveryMethodName}, 3 days,${deliveryMethod.deliveryMethodCost}$`,
-    },
-    {
-      infoTitle: 'Discount:',
-      infoText: `10%,Personal promo
-         code`,
-    },
-    {
-      infoTitle: 'Total Amount:',
-      infoText: `${Math.floor(total)}$`,
-    },
-  ];
+export const MyOrders = connect(mapStateToProps, {
+  getCurrentUserData,
+})(({navigation, getCurrentUserData, usersData}) => {
+  const [isDeliveredClicked, setIsDeliveredClicked] = useState(true);
+  const [isProcessingClicked, setIsProcessingClicked] = useState(false);
+  const [isCancelledClicked, setIsCancelledClicked] = useState(false);
+  const orders = usersData.orders || [];
+  const handleDelivered = () => {
+    setIsDeliveredClicked(true);
+    setIsProcessingClicked(false);
+    setIsCancelledClicked(false);
+  };
+  const handleProcessing = () => {
+    setIsDeliveredClicked(false);
+    setIsProcessingClicked(true);
+    setIsCancelledClicked(false);
+  };
+  const handleCancelled = () => {
+    setIsDeliveredClicked(false);
+    setIsProcessingClicked(false);
+    setIsCancelledClicked(true);
+  };
+  const handleUserData = async () => {
+    try {
+      await getCurrentUserData();
+    } catch (error) {
+      console.log('getCurrentUserData', error);
+    }
+  };
+  useEffect(() => {
+    handleUserData();
+  }, []);
   return (
     <View style={styles.container}>
       <StatusBar />
-      <ScrollView>
-        <View style={styles.header}>
-          <Text style={styles.orderNo}>Order №{orderNo}</Text>
-          <Text style={styles.date}>{date}</Text>
-        </View>
-        <View style={[styles.header, {justifyContent: 'flex-start'}]}>
-          <Text style={styles.date}>Tracking number:</Text>
-          <Text style={styles.orderNo}>{trackingNo}</Text>
-        </View>
+      <Text weight={'bold'} style={styles.title}>
+        My Orders
+      </Text>
 
-        <View style={styles.header}>
-          <Text style={styles.orderNo}>{quantity} items</Text>
-          <Text style={styles.status}>Delivered</Text>
-        </View>
-        <View style={styles.cards}>
-          <FlatList
-            data={orderedProducts}
-            renderItem={({item}) => (
-              <View style={styles.card}>
-                <ProductCard
-                  product={item}
-                  isRowView={true}
-                  isInOrders={true}
-                />
-              </View>
+      <View style={styles.btns}>
+        <Btn
+          width={110}
+          height={34}
+          btnName={'Delivered'}
+          titleStyle={{
+            color: isDeliveredClicked
+              ? theme.theme.colors.DARK
+              : theme.colors.TEXT,
+          }}
+          bgColor={
+            isDeliveredClicked ? theme.colors.TEXT : theme.colors.BACKGROUND
+          }
+          onPress={handleDelivered}
+        />
+        <Btn
+          btnName={'Processing'}
+          width={110}
+          height={34}
+          titleStyle={{
+            color: isProcessingClicked ? theme.colors.DARK : theme.colors.TEXT,
+          }}
+          bgColor={isProcessingClicked ? theme.colors.TEXT : null}
+          onPress={() => handleProcessing()}
+        />
+        <Btn
+          btnName={'Cancelled'}
+          width={110}
+          height={34}
+          titleStyle={{
+            color: isCancelledClicked ? theme.colors.DARK : theme.colors.TEXT,
+          }}
+          bgColor={isCancelledClicked ? theme.colors.TEXT : null}
+          onPress={handleCancelled}
+        />
+      </View>
+      <FlatList
+        data={orders.reverse()}
+        renderItem={({item}) => (
+          <Order
+            date={item.date}
+            orderNo={item.orderNo}
+            quantity={item.quantity}
+            total={Math.floor(
+              item.totalAmount + item.deliveryMethod.deliveryMethodCost,
             )}
-            keyExtractor={item => `${item.id - item.color}`}
+            trackingNo={item.trackingNo}
+            onPress={() =>
+              navigation.navigate('OrderDetails', {
+                orderedProducts: item.orderedProducts,
+                orderNo: item.orderNo,
+                trackingNo: item.trackingNo,
+                quantity: item.quantity,
+                date: item.date,
+                status: 'Delivered',
+                total: Math.floor(
+                  item.totalAmount + item.deliveryMethod.deliveryMethodCost,
+                ),
+                deliveryMethod: item.deliveryMethod,
+                paymentMethod: item.paymentMethod,
+                shippingAddress: item.shippingAddress,
+              })
+            }
           />
-        </View>
-        <Text style={styles.orderInfoTitle}>Order Information</Text>
-        {orderInfo.map(item => (
-          <View
-            style={[styles.header, {justifyContent: 'flex-start'}]}
-            key={item.infoText}>
-            <View style={{width: 152}}>
-              <Text style={styles.date}>{item.infoTitle}</Text>
-            </View>
-            <Text style={styles.orderNo}>{item.infoText}</Text>
-          </View>
-        ))}
-
-        <View style={styles.btn}>
-          <Btn
-            width={160}
-            height={40}
-            borderColor={theme.colors.TEXT}
-            borderWidth={1}
-            btnName={'Reorder'}
-            onPress={() => navigation.navigate('HomeScreen')}
-          />
-        </View>
-      </ScrollView>
+        )}
+        keyExtractor={item => item.orderNo}
+      />
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
     backgroundColor: theme.colors.BACKGROUND,
     paddingHorizontal: GLOBAL_STYLES.PADDING,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
+  title: {
+    color: theme.colors.TEXT,
+    fontSize: 34,
+    lineHeight: 34,
+    margin: 15,
   },
-  date: {
-    paddingRight: 10,
-    color: theme.colors.GRAY,
-    marginLeft: 18,
-  },
-  orderNo: {
-    fontSize: 16,
-    lineHeight: 20,
-    marginLeft: 18,
-  },
-  status: {
-    color: theme.colors.success,
-    lineHeight: 25,
-    marginRight: 15,
+  backIcon: {
+    marginTop: 20,
+    marginLeft: GLOBAL_STYLES.MARGIN_LEFT,
   },
 
-  cards: {
+  btns: {
     width: '100%',
-    display: 'flex',
-  },
-  orderInfoTitle: {
-    fontSize: 19,
-    lineHeight: 20,
-    marginLeft: 18,
-    marginTop: 18,
-    marginBottom: 20,
-  },
-  btn: {
-    width: 360,
+    flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 30,
-    marginBottom: 20,
+    justifyContent: 'center',
+    marginBottom: GLOBAL_STYLES.MARGIN_LEFT,
   },
 });
