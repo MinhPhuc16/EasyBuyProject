@@ -21,7 +21,7 @@ import {
 } from '../../components/Calculations';
 import {getCurrentProduct} from '../../store/products';
 import {connect} from 'react-redux';
-import {Btn} from '../components/Btn';
+import {Btn} from '../../components/Btn';
 import {addProductToUsersBag} from '../../api/auth';
 
 export const SingleProductScreen = connect(null, {

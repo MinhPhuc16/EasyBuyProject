@@ -104,7 +104,11 @@ const LogInScreen = ({navigation}) => {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity loading={loading} mode="contained" onPress={LogIn}>
+      <TouchableOpacity
+        loading={loading}
+        mode="contained"
+        onPress={LogIn}
+        onPressIn={() => navigation.navigate('BottomTabs')}>
         <Text> Login </Text>
       </TouchableOpacity>
       <View style={styles.Donthaveaccount}>

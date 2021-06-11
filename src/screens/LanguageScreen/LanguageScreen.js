@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {styles} from '../../components/order';
 import {Picker} from '@react-native-picker/picker';
 import {theme} from '../../common/theme';
+import RNPickerSelect from 'react-native-picker-select';
 
 const LanguageScreen = ({navigation}) => {
   const [selectedLanguage, setSelectedLanguage] = useState();
@@ -20,12 +20,15 @@ const LanguageScreen = ({navigation}) => {
         Which language and currency do you want to shop in?{' '}
       </Text>
       <View style={styles.box}>
+        <Text>Choose your Language</Text>
         <Picker
           selectedValue={selectedLanguage}
           onValueChange={(itemValue, itemIndex) =>
             setSelectedLanguage(itemValue)
           }>
           <Picker.Item label="Vietnamese" value="vietnamese" />
+          <Picker.Item label="Spainish" value="spainish" />
+          <Picker.Item label="Portugese" value="vietnamese" />
           <Picker.Item label="English" value="english" />
           <Picker.Item label="French" value="french" />
         </Picker>
@@ -41,17 +44,7 @@ const LanguageScreen = ({navigation}) => {
           <Picker.Item label="Euro" value="euro" />
         </Picker>
       </View>
-      <View style={styles.box}>
-        <Picker
-          selectedValue={selectedCountry}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedCountry(itemValue)
-          }>
-          <Picker.Item label="Vietnam" value="vietnam" />
-          <Picker.Item label="American" value="us" />
-          <Picker.Item label="Francr" value="france" />
-        </Picker>
-      </View>
+
       <View style={styles.Done}>
         <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
           <Text style={styles.text}> Done </Text>
@@ -67,26 +60,29 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   box: {
-    height: 70,
-    width: 80,
-    alignItems: 'center',
-    marginTop: 10,
+    height: 50,
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 30,
     paddingHorizontal: 10,
     borderWidth: 1,
     borderRadius: 5,
     backgroundColor: theme.colors.GRAY,
   },
   Done: {
-    height: 30,
-    width: 80,
+    height: 50,
+    width: '80%',
     backgroundColor: theme.colors.secondary,
     borderWidth: 1,
     alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 300,
   },
   text: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'normal',
-    alignItems: 'center',
+    alignSelf: 'center',
   },
 });
 export default LanguageScreen;

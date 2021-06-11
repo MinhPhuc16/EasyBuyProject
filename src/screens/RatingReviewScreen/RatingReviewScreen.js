@@ -1,11 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, Image, TextInput, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  Text,
+  Dimensions,
+} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import {theme} from '../../common/theme';
 
 const defaultImgUrl = require('../../assets/images/Rose_2.png');
 
-export const ReviewItem = ({
+export const RatingReviewScreen = ({
   username = 'Xuan Quynh',
   userImg = defaultImgUrl,
   rating = 4,

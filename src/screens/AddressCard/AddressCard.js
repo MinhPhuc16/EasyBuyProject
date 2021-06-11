@@ -46,7 +46,7 @@ export const AddressCard = ({
               styles.checkbox,
               {
                 backgroundColor: isSelected ? theme.colors.TEXT : null,
-                borderColor: isSelected ? null : COLORS.GRAY,
+                borderColor: isSelected ? null : theme.colors.GRAY,
                 borderWidth: isSelected ? null : 2,
               },
             ]}></View>

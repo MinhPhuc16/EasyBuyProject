@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Text,
 } from 'react-native';
 
 import {theme} from '../../common/theme';
@@ -37,8 +38,8 @@ const ProfileScreen = connect(mapStateToProps, {
 
   const profileSections = [
     {
-      sectionName: 'MyOrders',
-      dutyOfSection: `Already have ${user.orders.length} orders`,
+      sectionName: 'My Orders',
+      dutyOfSection: `Already have orders`,
       screenTo: 'MyOrders',
     },
     {
@@ -55,6 +56,7 @@ const ProfileScreen = connect(mapStateToProps, {
   return (
     <View style={styles.container}>
       <StatusBar />
+      <View></View>
       <View style={styles.logoutWrapper}>
         <Text weight={'bold'} style={styles.title}>
           My Profile

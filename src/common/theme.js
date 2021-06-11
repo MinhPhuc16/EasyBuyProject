@@ -10,7 +10,7 @@ export const theme = {
     error: '#f13a59',
     success: '#00B386',
     SALE: '#FF3E3E',
-    TEXT: '#F7F7F7',
+    TEXT: 'black',
     STAR: '#FFBA49',
     DARK: '#2A2C36',
     GRAY: '#ABB4BD',

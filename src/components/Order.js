@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
-import {theme} from '../../common/theme';
+import {theme} from '../common/theme';
 import {Btn} from '../components/Btn';
 
 export const Order = ({

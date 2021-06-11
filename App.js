@@ -1,28 +1,18 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
-  StyleSheet,
-} from 'react-native';
-
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, Image} from 'react-native';
+import {Provider, connect} from 'react-redux';
+import store, {persistor} from './src/store';
 import AppContainer from './src/navigation/index';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContainer />
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppContainer />
+      </PersistGate>
+    </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;

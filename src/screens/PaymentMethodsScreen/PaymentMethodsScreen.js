@@ -7,6 +7,7 @@ import {
   Image,
 } from 'react-native';
 import {theme} from '../../common/theme';
+import {Picker} from '@react-native-picker/picker';
 
 const PaymentMethodsScreen = () => {
   const DATA = [

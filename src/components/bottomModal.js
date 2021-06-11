@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 
 import {theme} from '../../src/common/theme';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList, Text} from 'react-native';
 import {AddressCard} from '../AddressCard/AddressCard';
 import {theme} from '../../common/theme';
 import {GLOBAL_STYLES} from '../../common/globalStyles';
@@ -41,10 +41,11 @@ export const ShippingAddressesScreen = connect(
           )}
         />
       ) : (
-        <CustomText> You have not added any shipping addresses yet </CustomText>
+        <Text> You have not added any shipping addresses yet </Text>
       )}
 
-      <Plus
+      <Image
+        source={require('../../assets/images/Rose_2.png')}
         style={{alignSelf: 'flex-end', backgroundColor: theme.colors.DARK}}
         onPress={() => navigation.navigate('AddingShippingAddress')}
       />

@@ -2,24 +2,24 @@ import React from 'react';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image} from 'react-native';
-import CartScreen from '../screens/CartScreen/CartScreen';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import UserScreen from '../screens/UserScreen/UserScreen';
+import {CartScreen} from '../screens/CartScreen/CartScreen';
+import {HomeStack} from '../navigation/HomeStack';
+import {UserStack} from '../navigation/UserStack';
 
-import OptionsScreen from '../screens/OptionsScreen/OptionsScreen';
+import {OptionsStack} from '../navigation/OptionsStack';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="HomeStack"
       tabBarOptions={{
         activeTintColor: '#e91e63',
       }}>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
@@ -33,8 +33,8 @@ const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="UserScreen"
-        component={UserScreen}
+        name="UserStack"
+        component={UserStack}
         options={{
           tabBarLabel: 'User',
           tabBarIcon: ({color, size}) => (
@@ -64,8 +64,8 @@ const BottomTabs = () => {
         }}
       />
       <Tab.Screen
-        name="OptionsScreen"
-        component={OptionsScreen}
+        name="OptionsStack"
+        component={OptionsStack}
         options={{
           tabBarLabel: 'Options',
           tabBarIcon: ({color, size}) => (

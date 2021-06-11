@@ -56,9 +56,7 @@ export const MyOrders = connect(mapStateToProps, {
           height={34}
           btnName={'Delivered'}
           titleStyle={{
-            color: isDeliveredClicked
-              ? theme.theme.colors.DARK
-              : theme.colors.TEXT,
+            color: isDeliveredClicked ? theme.colors.DARK : theme.colors.TEXT,
           }}
           bgColor={
             isDeliveredClicked ? theme.colors.TEXT : theme.colors.BACKGROUND

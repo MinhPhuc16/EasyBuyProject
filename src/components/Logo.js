@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import {theme} from '../common/theme';
 
 export default function Logo() {

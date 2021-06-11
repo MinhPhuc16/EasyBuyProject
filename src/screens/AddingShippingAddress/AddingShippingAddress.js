@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Input} from '../components';
+import {Input} from '../../components/Input';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {GLOBAL_STYLES} from '../../common/globalStyles';
 import {theme} from '../../common/theme';

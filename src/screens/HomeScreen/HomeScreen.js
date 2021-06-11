@@ -74,7 +74,10 @@ const Home = connect(mapStateToProps, {
       <ScrollView style={styles.container}>
         {showSale ? (
           <>
-            <Image source={banner} style={{width: '100%', height: 196}} />
+            <Image
+              source={require('../../assets/images/Rose_2.png')}
+              style={{width: '100%', height: 196}}
+            />
             <View style={styles.newItemsWrap}>
               <Text style={styles.categoryTitle} weight="bold">
                 Sale
@@ -108,7 +111,10 @@ const Home = connect(mapStateToProps, {
           </>
         ) : (
           <View style={styles.imageWrapper}>
-            <Image source={homeImage} style={{width: '100%', height: 480}} />
+            <Image
+              source={require('../../assets/images/Rose_2.png')}
+              style={{width: '100%', height: 480}}
+            />
             <Text style={styles.title}>Fashion sale</Text>
             <View style={styles.btn}>
               <Btn

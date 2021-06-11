@@ -21,7 +21,7 @@ import {GLOBAL_STYLES} from '../../common/globalStyles';
 const mapStateToProps = state => ({
   usersData: selectUserData(state),
 });
-export const MyBag = connect(mapStateToProps, {
+export const CartScreen = connect(mapStateToProps, {
   getCurrentUserData,
 })(({getCurrentUserData, usersData, navigation}) => {
   let bagProducts;

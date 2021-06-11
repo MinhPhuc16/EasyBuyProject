@@ -5,8 +5,10 @@ import {logoutUser} from '../../api/auth';
 
 export default function OptionsScreen({navigation}) {
   return (
-    <LinearGradient colors={('ff7f00', '#ffaf65')}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <LinearGradient
+        colors={['#ffaf65', '#e5e5e5']}
+        style={styles.linearGradient}>
         <TouchableOpacity
           style={styles.components}
           onPress={() => navigation.navigate('MyOrders')}>
@@ -27,11 +29,16 @@ export default function OptionsScreen({navigation}) {
           onPress={() => navigation.navigate('LanguageScreen')}>
           <Text style={styles.text}> Language </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.components}
+          onPress={() => navigation.navigate('EditProfileScreen')}>
+          <Text style={styles.text}> EditProfile </Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.components} onPress={logoutUser}>
           <Text style={styles.text}>Log Out</Text>
         </TouchableOpacity>
-      </View>
-    </LinearGradient>
+      </LinearGradient>
+    </View>
   );
 }
 
@@ -40,11 +47,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   components: {
-    marginTop: 15,
+    marginTop: 50,
     marginLeft: 15,
   },
   text: {
     fontWeight: 'bold',
     fontSize: 25,
+  },
+  linearGradient: {
+    height: '100%',
+    width: '100%',
   },
 });

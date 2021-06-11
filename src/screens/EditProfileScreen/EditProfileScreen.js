@@ -6,7 +6,9 @@ import {
   TextInput,
   Image,
   StyleSheet,
+  ImageBackground,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -14,7 +16,9 @@ import Animated from 'react-native-reanimated';
 import {theme} from '../../common/theme';
 
 const EditProfileScreen = () => {
-  const [image, setImage] = useState(require('../../assets/images/Rose_2.png'));
+  const [image, setImage] = useState(
+    'https://scontent.fhan3-1.fna.fbcdn.net/v/t1.6435-9/156101521_2001649893309778_2791937253516506491_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=PiNnXEcT4u4AX_I20BV&_nc_ht=scontent.fhan3-1.fna&oh=f25758afcff692bb9691cb2c63a18ea0&oe=60C7E299',
+  );
   const takePhotoFromCamera = () => {
     ImagePicker.openCamera({
       compressImageMaxWidth: 300,
@@ -79,7 +83,7 @@ const EditProfileScreen = () => {
         style={styles.image}
         source={require('../../assets/images/Group_9.png')}
       />
-      <View style={styles.header}>
+      <View style={styles.head}>
         <Text style={styles.text}> Hello </Text>
         <Image
           style={styles.logo}
@@ -122,13 +126,22 @@ const EditProfileScreen = () => {
                   imageStyle={{borderRadius: 75}}></ImageBackground>
               </View>
             </TouchableOpacity>
-            <Text style={{marginTop: 10, fontSize: 18, fontWeight: 'bold'}}>
+            <Text
+              style={{
+                marginTop: 25,
+                fontSize: 18,
+                fontWeight: 'bold',
+              }}>
               Xuan Quynh
             </Text>
           </View>
 
           <View style={styles.action}>
-            <FontAwesome name="user-o" color={colors.text} size={25} />
+            <FontAwesome
+              name="user-o"
+              color={theme.colors.secondary}
+              size={25}
+            />
             <TextInput
               placeholder="First Name"
               placeholderTextColor="#666666"
@@ -142,7 +155,11 @@ const EditProfileScreen = () => {
             />
           </View>
           <View style={styles.action}>
-            <FontAwesome name="user-o" color={colors.text} size={25} />
+            <FontAwesome
+              name="user-o"
+              color={theme.colors.secondary}
+              size={25}
+            />
             <TextInput
               placeholder="Last Name"
               placeholderTextColor="#666666"
@@ -156,7 +173,11 @@ const EditProfileScreen = () => {
             />
           </View>
           <View style={styles.action}>
-            <FontAwesome name="phone" color={colors.text} size={25} />
+            <FontAwesome
+              name="phone"
+              color={theme.colors.secondary}
+              size={25}
+            />
             <TextInput
               placeholder="Phone Number"
               placeholderTextColor="#666666"
@@ -171,7 +192,11 @@ const EditProfileScreen = () => {
             />
           </View>
           <View style={styles.action}>
-            <FontAwesome name="envelope-o" color={colors.text} size={25} />
+            <FontAwesome
+              name="envelope-o"
+              color={theme.colors.secondary}
+              size={25}
+            />
             <TextInput
               placeholder="Email"
               placeholderTextColor="#666666"
@@ -186,7 +211,7 @@ const EditProfileScreen = () => {
             />
           </View>
           <View style={styles.action}>
-            <FontAwesome name="globe" color={colors.text} size={25} />
+            <FontAwesome name="globe" color={theme.colors.primary} size={25} />
             <TextInput
               placeholder="Country"
               placeholderTextColor="#666666"
@@ -199,20 +224,7 @@ const EditProfileScreen = () => {
               ]}
             />
           </View>
-          <View style={styles.action}>
-            <Icon name="map-marker-outline" color={colors.text} size={20} />
-            <TextInput
-              placeholder="City"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              style={[
-                styles.textInput,
-                {
-                  color: theme.colors.TEXT,
-                },
-              ]}
-            />
-          </View>
+
           <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
             <Text style={styles.panelButtonTitle}>Submit</Text>
           </TouchableOpacity>
@@ -229,8 +241,22 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
   },
-  header: {
+  head: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: theme.colors.secondary,
+    alignItems: 'center',
+  },
+  ProfilePictureText: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  optional: {
+    fontSize: 18,
+    alignSelf: 'center',
+    marginBottom: 5,
   },
   body: {
     flex: 8,
@@ -238,7 +264,7 @@ const styles = StyleSheet.create({
   commandButton: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
+    backgroundColor: theme.colors.secondary,
     alignItems: 'center',
     marginTop: 10,
   },
@@ -280,7 +306,7 @@ const styles = StyleSheet.create({
   panelButton: {
     padding: 13,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
+    backgroundColor: theme.colors.secondary,
     alignItems: 'center',
     marginVertical: 7,
   },
@@ -306,10 +332,26 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -12,
+    marginTop: Platform.OS === 'ios' ? 0 : -20,
     paddingLeft: 10,
     color: '#05375a',
     fontSize: 20,
+  },
+  image: {
+    height: 60,
+    marginTop: 50,
+    alignSelf: 'center',
+    position: 'relative',
+    marginLeft: 20,
+  },
+  text: {
+    fontSize: 20,
+    marginLeft: 10,
+  },
+  logo: {
+    height: 30,
+    width: 30,
+    marginRight: 15,
   },
 });
 
