@@ -14,6 +14,7 @@ import {theme} from '../../../common/theme';
 import Toast from '../../../components/Toast';
 import {emailValidator} from '../../../validator/emailValidator';
 import {passwordValidator} from '../../../validator/passwordValidator';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {
   GoogleSignin,
@@ -78,32 +79,39 @@ const LogInScreen = ({navigation}) => {
       <Logo />
       <Header>Welcome, </Header>
       <Text style={styles.text}> Sign in to continue </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email.value}
-        onChangeText={text => setEmail({value: text, error: ''})}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password.value}
-        onChangeText={text => setPassword({value: text, error: ''})}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
+      <View style={styles.TextInput}>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          value={email.value}
+          onChangeText={text => setEmail({value: text, error: ''})}
+          error={!!email.error}
+          errorText={email.error}
+          autoCapitalize="none"
+          textContentType="emailAddress"
+          keyboardType="email-address"
+        />
+      </View>
+      <View style={styles.TextInput}>
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          value={password.value}
+          onChangeText={text => setPassword({value: text, error: ''})}
+          error={!!password.error}
+          errorText={password.error}
+          secureTextEntry
+        />
+      </View>
+
       <View style={styles.forgotPassword}>
+        <MaterialIcons name="lock" height={20} width={20} />
         <TouchableOpacity
           onPress={() => navigation.navigate('ResetPasswordScreen')}>
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
+
       <TouchableOpacity
         loading={loading}
         mode="contained"
@@ -140,6 +148,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-end',
     marginBottom: 30,
+    flexDirection: 'row',
   },
   Donthaveaccount: {
     flexDirection: 'row',
@@ -153,9 +162,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.secondary,
   },
-  input: {
+  TextInput: {
+    height: 30,
+    width: 85,
+    alignSelf: 'center',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
   },
 });
 

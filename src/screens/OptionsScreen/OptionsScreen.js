@@ -34,6 +34,11 @@ export default function OptionsScreen({navigation}) {
           onPress={() => navigation.navigate('EditProfileScreen')}>
           <Text style={styles.text}> EditProfile </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.components}
+          onPress={() => navigation.navigate('FavoriteScreen')}>
+          <Text style={styles.text}> Your Favorites </Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.components} onPress={logoutUser}>
           <Text style={styles.text}>Log Out</Text>
         </TouchableOpacity>
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   components: {
-    marginTop: 50,
+    paddingTop: 50,
     marginLeft: 15,
   },
   text: {

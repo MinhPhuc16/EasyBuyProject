@@ -1,66 +1,38 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
   StatusBar,
   TouchableOpacity,
   Image,
+  Text,
 } from 'react-native';
 import {theme} from '../../common/theme';
 import {Picker} from '@react-native-picker/picker';
 
-const PaymentMethodsScreen = () => {
-  const DATA = [
-    {
-      id: '9',
-      title: 'Cash',
-      selected: false,
-    },
-    {
-      id: '10',
-      title: 'Airpay',
-      selected: true,
-    },
-    {
-      id: '11',
-      title: 'Momo',
-      selected: false,
-    },
-    {
-      id: '12',
-      title: 'VNPay',
-      selected: false,
-    },
-    {
-      id: '13',
-      title: 'ViettelPay',
-      selected: false,
-    },
-    {
-      id: '14',
-      title: 'VinaPay',
-      selected: false,
-    },
-  ];
+const PaymentMethodsScreen = ({navigation}) => {
+  const [selectedPayment, setSelectedPayment] = useState();
   return (
     <View style={styles.container}>
-      <Picker
-        style={styles.pickerStyle}
-        data={DATA}
-        optionStyle={styles.optionStyle}
-        selectedOptionStyle={styles.selectedOptionStyle}
-        optionTextStyle={styles.optionTextStyle}
-        selectedOptionTextStyle={styles.selectedOptionTextStyle}
-      />
-      <View>
-        <TouchableOpacity
-          style={{
-            alignSelf: 'flex-end',
-            backgroundColor: theme.colors.DARK,
-          }}
-          onPress={() =>
-            navigation.navigate('AddPayCardScreen')
-          }></TouchableOpacity>
+      <View style={styles.box}>
+        <Text style={styles.text1}>Choose your Payment</Text>
+        <Picker
+          selectedValue={selectedPayment}
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedPayment(itemValue)
+          }>
+          <Picker.Item label="Cash" value="cash" />
+          <Picker.Item label="Momo" value="momo" />
+          <Picker.Item label="Visa" value="visa" />
+          <Picker.Item label="Airpay" value="airpay" />
+          <Picker.Item label="VNPay" value="vnpay" />
+          <Picker.Item label="ViettelPay" value="viettelpay" />
+        </Picker>
+      </View>
+      <View style={styles.Done}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.text}> Done </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -69,33 +41,44 @@ const PaymentMethodsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 100,
+    backgroundColor: 'white',
   },
-  optionStyle: {
-    margin: 5,
-    width: 100,
-    height: 30,
-    justifyContent: 'center',
+  box: {
+    height: 50,
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 30,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: theme.colors.GRAY,
+  },
+  Done: {
+    height: 50,
+    width: '80%',
+    backgroundColor: theme.colors.primary,
+
     alignItems: 'center',
-    borderRadius: 4,
-    backgroundColor: '#E9EFFE',
-    fontFamily: 'Helevica Neue',
-  },
-  selectedOptionStyle: {
-    margin: 5,
-    width: 100,
-    height: 30,
     justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 300,
+    borderRadius: 30,
+  },
+  text: {
+    fontSize: 22,
+    fontWeight: 'normal',
+    alignSelf: 'center',
+  },
+  text1: {
+    fontSize: 20,
     alignItems: 'center',
-    borderRadius: 4,
-    backgroundColor: '#497DF9',
-    fontFamily: 'Helevica Neue',
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
-  optionTextStyle: {
-    color: '#497DF9',
-  },
-  selectedOptionTextStyle: {
-    color: '#ffffff',
+  description: {
+    fontSize: 18,
+    marginTop: 10,
+    marginLeft: 10,
   },
 });
 

@@ -59,7 +59,7 @@ export const MyOrders = connect(mapStateToProps, {
             color: isDeliveredClicked ? theme.colors.DARK : theme.colors.TEXT,
           }}
           bgColor={
-            isDeliveredClicked ? theme.colors.TEXT : theme.colors.BACKGROUND
+            isDeliveredClicked ? theme.colors.primary : theme.colors.BACKGROUND
           }
           onPress={handleDelivered}
         />
@@ -70,7 +70,7 @@ export const MyOrders = connect(mapStateToProps, {
           titleStyle={{
             color: isProcessingClicked ? theme.colors.DARK : theme.colors.TEXT,
           }}
-          bgColor={isProcessingClicked ? theme.colors.TEXT : null}
+          bgColor={isProcessingClicked ? theme.colors.primary : null}
           onPress={() => handleProcessing()}
         />
         <Btn
@@ -80,7 +80,7 @@ export const MyOrders = connect(mapStateToProps, {
           titleStyle={{
             color: isCancelledClicked ? theme.colors.DARK : theme.colors.TEXT,
           }}
-          bgColor={isCancelledClicked ? theme.colors.TEXT : null}
+          bgColor={isCancelledClicked ? theme.colors.primary : null}
           onPress={handleCancelled}
         />
       </View>

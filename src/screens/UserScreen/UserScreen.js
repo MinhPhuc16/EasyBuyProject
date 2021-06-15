@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     color: theme.colors.TEXT,
     fontSize: 34,
     marginVertical: 24,
+    paddingTop: 30,
   },
   email: {
     color: theme.colors.GRAY,

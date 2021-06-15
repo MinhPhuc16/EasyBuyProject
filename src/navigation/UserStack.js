@@ -7,7 +7,8 @@ import {AddingShippingAddress} from '../screens/AddingShippingAddress/AddingShip
 import {ShippingAddressesScreen} from '../screens/ShippingAddressesScreen/ShippingAddressesScreen';
 import {theme} from '../common/theme';
 import PaymentMethodsScreen from '../screens/PaymentMethodsScreen/PaymentMethodsScreen';
-import {Image} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {Image, TouchableOpacity} from 'react-native';
 const {Navigator, Screen} = createStackNavigator();
 export const UserStack = () => {
   return (
@@ -36,7 +37,11 @@ export const UserStack = () => {
             elevation: 0,
           },
           headerTintColor: theme.colors.TEXT,
-          headerLeft: () => <Back onPress={() => navigation.goBack()} />,
+          headerLeft: () => (
+            <TouchableOpacity>
+              <AntDesign name="left" onPress={() => navigation.goBack()} />
+            </TouchableOpacity>
+          ),
         })}
         name="OrderDetails"
         component={OrderDetails}
@@ -51,12 +56,9 @@ export const UserStack = () => {
           },
           headerTintColor: theme.colors.TEXT,
           headerLeft: () => (
-            <Image
-              source={require('../assets/images/left-arrow.png')}
-              height={26}
-              width={24}
-              onPress={() => navigation.goBack()}
-            />
+            <TouchableOpacity>
+              <AntDesign name="left" onPress={() => navigation.goBack()} />
+            </TouchableOpacity>
           ),
         })}
         name="MyOrders"
@@ -71,12 +73,9 @@ export const UserStack = () => {
           },
           headerTintColor: theme.colors.TEXT,
           headerLeft: () => (
-            <Image
-              source={require('../assets/images/left-arrow.png')}
-              height={26}
-              width={24}
-              onPress={() => navigation.goBack()}
-            />
+            <TouchableOpacity>
+              <AntDesign name="left" onPress={() => navigation.goBack()} />
+            </TouchableOpacity>
           ),
         })}
         name="AddingShippingAddress"
@@ -91,12 +90,9 @@ export const UserStack = () => {
           },
           headerTintColor: theme.colors.TEXT,
           headerLeft: () => (
-            <Image
-              source={require('../assets/images/left-arrow.png')}
-              height={26}
-              width={24}
-              onPress={() => navigation.goBack()}
-            />
+            <TouchableOpacity>
+              <AntDesign name="left" onPress={() => navigation.goBack()} />
+            </TouchableOpacity>
           ),
         })}
         name="ShippingAddressesScreen"
@@ -106,12 +102,9 @@ export const UserStack = () => {
         options={({navigation}) => ({
           title: 'Payment Methods',
           headerLeft: () => (
-            <Image
-              source={require('../assets/images/left-arrow.png')}
-              height={26}
-              width={24}
-              onPress={() => navigation.goBack()}
-            />
+            <TouchableOpacity>
+              <AntDesign name="left" onPress={() => navigation.goBack()} />
+            </TouchableOpacity>
           ),
         })}
         name="PaymentMethodsScreen"

@@ -75,7 +75,7 @@ const Home = connect(mapStateToProps, {
         {showSale ? (
           <>
             <Image
-              source={require('../../assets/images/Rose_2.png')}
+              source={require('../../assets/images/Rosee.jpeg')}
               style={{width: '100%', height: 196}}
             />
             <View style={styles.newItemsWrap}>
@@ -112,7 +112,7 @@ const Home = connect(mapStateToProps, {
         ) : (
           <View style={styles.imageWrapper}>
             <Image
-              source={require('../../assets/images/Rose_2.png')}
+              source={require('../../assets/images/Rosee.jpeg')}
               style={{width: '100%', height: 480}}
             />
             <Text style={styles.title}>Fashion sale</Text>

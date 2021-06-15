@@ -8,6 +8,7 @@ import PaymentMethodsScreen from '../screens/PaymentMethodsScreen/PaymentMethods
 import {TouchableOpacity} from 'react-native';
 import OptionsScreen from '../screens/OptionsScreen/OptionsScreen';
 import EditProfileScreen from '../screens/EditProfileScreen/EditProfileScreen';
+import {FavoriteScreen} from '../screens/FavoriteScreen/FavoriteScreen';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 const {Navigator, Screen} = createStackNavigator();
 export const OptionsStack = () => {
@@ -96,6 +97,18 @@ export const OptionsStack = () => {
         })}
         name="PaymentMethodsScreen"
         component={PaymentMethodsScreen}
+      />
+      <Screen
+        options={({navigation}) => ({
+          title: 'Payment Methods',
+          headerLeft: () => (
+            <TouchableOpacity>
+              <AntDesign name="left" onPress={() => navigation.goBack()} />
+            </TouchableOpacity>
+          ),
+        })}
+        name="FavoriteScreen"
+        component={FavoriteScreen}
       />
     </Navigator>
   );

@@ -5,6 +5,7 @@ import {Image} from 'react-native';
 import {CartScreen} from '../screens/CartScreen/CartScreen';
 import {HomeStack} from '../navigation/HomeStack';
 import {UserStack} from '../navigation/UserStack';
+import {ShopStack} from '../navigation/ShopStack';
 
 import {OptionsStack} from '../navigation/OptionsStack';
 
@@ -41,6 +42,21 @@ const BottomTabs = () => {
             <Image
               resizeMode="contain"
               source={require('../assets/images/user_1.png')}
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ShopStack"
+        component={ShopStack}
+        options={{
+          tabBarLabel: 'Shop',
+          tabBarIcon: ({color, size}) => (
+            <Image
+              resizeMode="contain"
+              source={require('../assets/images/shopping-bag_1.png')}
               color={color}
               size={size}
             />

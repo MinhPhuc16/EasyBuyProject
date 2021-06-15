@@ -54,7 +54,7 @@ export const CartScreen = connect(mapStateToProps, {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <Text weight={'bold'} style={styles.title}>
+      <Text fontWeight={'bold'} style={styles.title}>
         My Cart
       </Text>
       {bagProducts.length ? (
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 34,
     lineHeight: 34,
     marginVertical: 30,
+    paddingTop: 30,
   },
   amount: {
     color: theme.colors.GRAY,

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -14,11 +14,13 @@ import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import {theme} from '../../common/theme';
+import firestore from '@react-native-firebase/firestore';
 
-const EditProfileScreen = () => {
+const EditProfileScreen = ({navigation}) => {
   const [image, setImage] = useState(
     'https://scontent.fhan3-1.fna.fbcdn.net/v/t1.6435-9/156101521_2001649893309778_2791937253516506491_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=PiNnXEcT4u4AX_I20BV&_nc_ht=scontent.fhan3-1.fna&oh=f25758afcff692bb9691cb2c63a18ea0&oe=60C7E299',
   );
+
   const takePhotoFromCamera = () => {
     ImagePicker.openCamera({
       compressImageMaxWidth: 300,
@@ -84,11 +86,13 @@ const EditProfileScreen = () => {
         source={require('../../assets/images/Group_9.png')}
       />
       <View style={styles.head}>
-        <Text style={styles.text}> Hello </Text>
-        <Image
-          style={styles.logo}
-          source={require('../../assets/images/user_1.png')}
-        />
+        <Text style={styles.text}> Hello, Quynh </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('UserStack')}>
+          <Image
+            style={styles.logo}
+            source={require('../../assets/images/user.png')}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.body}>
         <Text style={styles.ProfilePictureText}> Profile Picture </Text>

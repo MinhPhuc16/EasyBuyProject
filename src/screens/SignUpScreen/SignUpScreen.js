@@ -130,10 +130,14 @@ const styles = StyleSheet.create({
   },
   Alreadyhaveaccount: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 5,
   },
   link: {
     fontWeight: 'bold',
     color: theme.colors.primary,
+  },
+  text: {
+    fontSize: 15,
+    color: theme.colors.TEXT,
   },
 });
