@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {signUpUser} from '../../api/auth';
 import Logo from '../../components/Logo';
-import Header from '../../components/Header';
 import {theme} from '../../common/theme';
 import Toast from '../../components/Toast';
 import {emailValidator} from '../../validator/emailValidator';
@@ -82,36 +81,48 @@ export default function SignUpScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Logo />
-      <Header> Create account, </Header>
+      <Text style={styles.header}> Create account</Text>
       <Text style={styles.text}> Sign in to get started </Text>
-      <TextInput
-        placeholder="Name"
-        value={name.value}
-        onChangeText={text => setName({value: text, error: ''})}
-        error={!!name.error}
-        errorText={name.error}
-      />
-      <TextInput
-        placeholder="Email"
-        value={email.value}
-        onChangeText={text => setEmail({value: text, error: ''})}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password.value}
-        onChangeText={text => setPassword({value: text, error: ''})}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-      <Text> Gender: </Text>
+      <View style={styles.TextInput}>
+        <TextInput
+          style={styles.input}
+          placeholder="    Name"
+          value={name.value}
+          onChangeText={text => setName({value: text, error: ''})}
+          error={!!name.error}
+          errorText={name.error}
+        />
+      </View>
+      <View style={styles.TextInput}>
+        <TextInput
+          style={styles.input}
+          placeholder="    Email"
+          value={email.value}
+          onChangeText={text => setEmail({value: text, error: ''})}
+          error={!!email.error}
+          errorText={email.error}
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
+      </View>
+      <View style={styles.TextInput}>
+        <TextInput
+          style={styles.input}
+          placeholder="    Password"
+          value={password.value}
+          onChangeText={text => setPassword({value: text, error: ''})}
+          error={!!password.error}
+          errorText={password.error}
+          secureTextEntry
+        />
+      </View>
+
+      <Text style={styles.gender}> Gender: </Text>
       <RadioGroup radioButtons={radioButtons} onPress={onPressRadioButton} />
       <TouchableOpacity loading={loading} onPress={adduser} onPressIn={SignUp}>
-        <Text> SignUp </Text>
+        <View style={styles.login}>
+          <Text style={styles.loginText}> SignUp </Text>
+        </View>
       </TouchableOpacity>
       <View style={styles.Alreadyhaveaccount}>
         <Text>Already have an account? </Text>
@@ -137,7 +148,46 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
   text: {
-    fontSize: 15,
+    fontSize: 20,
     color: theme.colors.TEXT,
+    marginLeft: 10,
+  },
+  header: {
+    marginTop: 20,
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+  },
+  TextInput: {
+    height: 30,
+    width: '90%',
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 8,
+  },
+  input: {
+    alignItems: 'center',
+    marginLeft: 10,
+    justifyContent: 'flex-start',
+  },
+  gender: {
+    marginLeft: 18,
+    fontSize: 20,
+  },
+  login: {
+    height: 40,
+    width: '80%',
+    alignSelf: 'center',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    borderRadius: 10,
+    backgroundColor: theme.colors.secondary,
+  },
+  loginText: {
+    fontSize: 20,
+    fontWeight: 'normal',
   },
 });

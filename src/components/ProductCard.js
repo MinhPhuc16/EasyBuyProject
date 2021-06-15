@@ -30,7 +30,6 @@ export const ProductCard = connect(mapStateToProps, {
   }) => {
     const {
       id,
-      brandName,
       name,
       price,
       size,
@@ -116,8 +115,6 @@ export const ProductCard = connect(mapStateToProps, {
                   ({totalRatingCalc(rating)})
                 </Text>
               </View>
-
-              <Text style={{color: theme.colors.GRAY}}>{brandName}</Text>
               <Text weight="medium">{name.toLowerCase()}</Text>
 
               <View style={styles.priceRow}>

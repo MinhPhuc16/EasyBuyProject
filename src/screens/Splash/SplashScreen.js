@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 const SplashScreen = ({navigation}) => {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      navigation.navigate('BottomTabs');
+      navigation.navigate('SignUpScreen');
     } else {
       navigation.navigate('LogInScreen');
     }

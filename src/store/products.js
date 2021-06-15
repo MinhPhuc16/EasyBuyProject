@@ -138,6 +138,7 @@ export const getCurrentProduct = productID => async dispatch => {
       .doc(productID)
       .onSnapshot(function (doc) {
         dispatch(setCurrentProduct(doc.data()));
+        console.log('djtconmethHieunguvcl', doc.data());
       });
   } catch (e) {
     console.log('getCurrentProduct error', e);

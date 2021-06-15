@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {loginUser} from '../../../api/auth';
 import Logo from '../../../components/Logo';
-import Header from '../../../components/Header';
 import {theme} from '../../../common/theme';
 import Toast from '../../../components/Toast';
 import {emailValidator} from '../../../validator/emailValidator';
@@ -77,12 +76,12 @@ const LogInScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Logo />
-      <Header>Welcome, </Header>
+      <Text style={styles.header}> Welcome</Text>
       <Text style={styles.text}> Sign in to continue </Text>
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="   Email"
           value={email.value}
           onChangeText={text => setEmail({value: text, error: ''})}
           error={!!email.error}
@@ -95,7 +94,7 @@ const LogInScreen = ({navigation}) => {
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="Password"
+          placeholder="   Password"
           value={password.value}
           onChangeText={text => setPassword({value: text, error: ''})}
           error={!!password.error}
@@ -105,22 +104,20 @@ const LogInScreen = ({navigation}) => {
       </View>
 
       <View style={styles.forgotPassword}>
-        <MaterialIcons name="lock" height={20} width={20} />
         <TouchableOpacity
           onPress={() => navigation.navigate('ResetPasswordScreen')}>
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
+        <MaterialIcons name="lock" size={20} />
       </View>
 
-      <TouchableOpacity
-        loading={loading}
-        mode="contained"
-        onPress={LogIn}
-        onPressIn={() => navigation.navigate('BottomTabs')}>
-        <Text> Login </Text>
+      <TouchableOpacity loading={loading} mode="contained" onPress={LogIn}>
+        <View style={styles.login}>
+          <Text style={styles.loginText}> LogIn</Text>
+        </View>
       </TouchableOpacity>
       <View style={styles.Donthaveaccount}>
-        <Text>Don’t have an account? </Text>
+        <Text style={styles.noAccountText}>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('SignUpScreen')}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
@@ -147,27 +144,65 @@ const styles = StyleSheet.create({
   forgotPassword: {
     width: '100%',
     alignItems: 'flex-end',
-    marginBottom: 30,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
   },
   Donthaveaccount: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 10,
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   forgot: {
-    fontSize: 12,
+    fontSize: 20,
     color: theme.colors.secondary,
+    marginTop: 6,
   },
   link: {
     fontWeight: 'bold',
     color: theme.colors.secondary,
+    fontSize: 16,
   },
   TextInput: {
     height: 30,
-    width: 85,
+    width: '90%',
     alignSelf: 'center',
     borderWidth: 1,
     borderRadius: 10,
+    marginTop: 8,
+  },
+  header: {
+    marginTop: 20,
+    fontSize: 35,
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+  },
+  body: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 20,
+    marginTop: 8,
+    marginLeft: 10,
+  },
+  login: {
+    height: 40,
+    width: '80%',
+    alignSelf: 'center',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    borderRadius: 10,
+    backgroundColor: theme.colors.secondary,
+  },
+  loginText: {
+    fontSize: 20,
+    fontWeight: 'normal',
+  },
+  noAccountText: {
+    fontSize: 16,
+    fontWeight: 'normal',
   },
 });
 

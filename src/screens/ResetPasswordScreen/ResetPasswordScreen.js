@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import Logo from '../../components/Logo';
-import Header from '../../components/Header';
 import {emailValidator} from '../../validator/emailValidator';
 import Toast from '../../components/Toast';
 import {sendEmailWithPassword} from '../../api/auth';
@@ -38,7 +37,7 @@ export default function ResetPasswordScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Logo />
-      <Header> Reset your Password. </Header>
+      <Text> Reset your password</Text>
       <TextInput
         style={styles.input}
         placeholder="E-mail address"
