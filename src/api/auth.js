@@ -1,5 +1,6 @@
 import firebase from '@react-native-firebase/app';
-import '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 export const logoutUser = () => {
   try {
@@ -11,30 +12,56 @@ export const logoutUser = () => {
 
 export const signUpUser = async ({name, email, password}) => {
   try {
-    const user = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    firebase.auth().currentUser.updateProfile({
-      displayName: name,
-    });
-    return {user};
-  } catch (error) {
-    return {
-      error: error.message,
-    };
+    await auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        //Once the user creation has happened successfully, we can add the currentUser into firestore
+        //with the appropriate details.
+        firestore()
+          .collection('users')
+          .doc(auth().currentUser.uid)
+          .set({
+            name: name,
+            email: email,
+            createdAt: firestore.Timestamp.fromDate(new Date()),
+            userImg: null,
+          })
+          //ensure we catch any errors at this stage to advise us if something does go wrong
+          .catch(error => {
+            console.log(
+              'Something went wrong with added user to firestore: ',
+              error,
+            );
+          });
+      })
+      //we need to catch the whole sign up process if it fails too.
+      .catch(error => {
+        console.log('Something went wrong with sign up: ', error);
+      });
+  } catch (e) {
+    console.log(e);
   }
 };
 
 export const loginUser = async ({email, password}) => {
   try {
-    const user = await firebase
+    firebase
       .auth()
-      .signInWithEmailAndPassword(email, password);
-    return {user};
+      .signInWithEmailAndPassword(email, password)
+      .then(async () => {
+        const {currentUser} = await firebase.auth();
+        let userUid = currentUser.uid;
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(userUid)
+          .get()
+          .then(function (doc) {
+            console.log('userDattaaa', doc.data());
+          });
+      });
   } catch (error) {
-    return {
-      error: error.message,
-    };
+    console.log('signIN error', error);
   }
 };
 

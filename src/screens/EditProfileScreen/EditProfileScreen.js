@@ -15,11 +15,108 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import Animated from 'react-native-reanimated';
 import {theme} from '../../common/theme';
 import firestore from '@react-native-firebase/firestore';
+import firebase from '@react-native-firebase/app';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import storage from '@react-native-firebase/storage';
 
 const EditProfileScreen = ({navigation}) => {
   const [image, setImage] = useState(
     'https://scontent.fhan3-1.fna.fbcdn.net/v/t1.6435-9/156101521_2001649893309778_2791937253516506491_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=PiNnXEcT4u4AX_I20BV&_nc_ht=scontent.fhan3-1.fna&oh=f25758afcff692bb9691cb2c63a18ea0&oe=60C7E299',
   );
+  const [uploading, setUploading] = useState(false);
+  const [transferred, setTransferred] = useState(0);
+  const [userData, setUserData] = useState(null);
+  const user = firebase.auth().currentUser;
+
+  const getUser = async () => {
+    const currentUser = await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .get()
+      .then(documentSnapshot => {
+        if (documentSnapshot.exists) {
+          console.log('User Data', documentSnapshot.data());
+          setUserData(documentSnapshot.data());
+        }
+      });
+  };
+
+  const handleUpdate = async () => {
+    let imgUrl = await uploadImage();
+
+    if (imgUrl == null && userData.userImg) {
+      imgUrl = userData.userImg;
+    }
+    firestore()
+      .collection('users')
+      .doc(user.uid)
+      .update({
+        name: userData.name,
+        phone: userData.phone,
+        dob: userData.dob,
+        country: userData.country,
+        city: userData.city,
+      })
+      .then(() => {
+        console.log('User Updated!');
+        Alert.alert(
+          'Profile Updated!',
+          'Your profile has been updated successfully.',
+        );
+      });
+  };
+  const uploadImage = async () => {
+    if (image == null) {
+      return null;
+    }
+    const uploadUri = image;
+    let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+
+    // Add timestamp to File Name
+    const extension = filename.split('.').pop();
+    const name = filename.split('.').slice(0, -1).join('.');
+    filename = name + Date.now() + '.' + extension;
+
+    setUploading(true);
+    setTransferred(0);
+
+    const storageRef = storage().ref(`photos/${filename}`);
+    const task = storageRef.putFile(uploadUri);
+
+    // Set transferred state
+    task.on('state_changed', taskSnapshot => {
+      console.log(
+        `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
+      );
+
+      setTransferred(
+        Math.round(taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) *
+          100,
+      );
+    });
+
+    try {
+      await task;
+
+      const url = await storageRef.getDownloadURL();
+
+      setUploading(false);
+      setImage(null);
+
+      // Alert.alert(
+      //   'Image uploaded!',
+      //   'Your image has been uploaded to the Firebase Cloud Storage Successfully!',
+      // );
+      return url;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const takePhotoFromCamera = () => {
     ImagePicker.openCamera({
@@ -29,7 +126,8 @@ const EditProfileScreen = ({navigation}) => {
       compressImageQuality: 0.7,
     }).then(image => {
       console.log(image);
-      setImage(image.path);
+      const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
+      setImage(imageUri);
       this.bs.current.snapTo(1);
     });
   };
@@ -42,7 +140,8 @@ const EditProfileScreen = ({navigation}) => {
       compressImageQuality: 0.7,
     }).then(image => {
       console.log(image);
-      setImage(image.path);
+      const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
+      setImage(imageUri);
       this.bs.current.snapTo(1);
     });
   };
@@ -86,7 +185,13 @@ const EditProfileScreen = ({navigation}) => {
         source={require('../../assets/images/Group_9.png')}
       />
       <View style={styles.head}>
-        <Text style={styles.text}> Hello, Quynh </Text>
+        <View style={styles.nameContainer}>
+          <Text style={styles.text}> Hello, </Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+            {userData ? userData.name : ''}
+          </Text>
+        </View>
+
         <TouchableOpacity onPress={() => navigation.navigate('UserStack')}>
           <Image
             style={styles.logo}
@@ -130,14 +235,6 @@ const EditProfileScreen = ({navigation}) => {
                   imageStyle={{borderRadius: 75}}></ImageBackground>
               </View>
             </TouchableOpacity>
-            <Text
-              style={{
-                marginTop: 25,
-                fontSize: 18,
-                fontWeight: 'bold',
-              }}>
-              Xuan Quynh
-            </Text>
           </View>
 
           <View style={styles.action}>
@@ -150,6 +247,8 @@ const EditProfileScreen = ({navigation}) => {
               placeholder="First Name"
               placeholderTextColor="#666666"
               autoCorrect={false}
+              value={userData ? userData.name : ''}
+              onChangeText={txt => setUserData({...userData, name: txt})}
               style={[
                 styles.textInput,
                 {
@@ -158,24 +257,7 @@ const EditProfileScreen = ({navigation}) => {
               ]}
             />
           </View>
-          <View style={styles.action}>
-            <FontAwesome
-              name="user-o"
-              color={theme.colors.secondary}
-              size={25}
-            />
-            <TextInput
-              placeholder="Last Name"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              style={[
-                styles.textInput,
-                {
-                  color: theme.colors.TEXT,
-                },
-              ]}
-            />
-          </View>
+
           <View style={styles.action}>
             <FontAwesome
               name="phone"
@@ -187,6 +269,8 @@ const EditProfileScreen = ({navigation}) => {
               placeholderTextColor="#666666"
               keyboardType="number-pad"
               autoCorrect={false}
+              value={userData ? userData.phone : ''}
+              onChangeText={txt => setUserData({...userData, phone: txt})}
               style={[
                 styles.textInput,
                 {
@@ -197,15 +281,16 @@ const EditProfileScreen = ({navigation}) => {
           </View>
           <View style={styles.action}>
             <FontAwesome
-              name="envelope-o"
+              name="birthday-cake"
               color={theme.colors.secondary}
               size={25}
             />
             <TextInput
-              placeholder="Email"
+              placeholder="Date of Birth"
               placeholderTextColor="#666666"
-              keyboardType="email-address"
               autoCorrect={false}
+              value={userData ? userData.dob : ''}
+              onChangeText={txt => setUserData({...userData, dob: txt})}
               style={[
                 styles.textInput,
                 {
@@ -214,6 +299,7 @@ const EditProfileScreen = ({navigation}) => {
               ]}
             />
           </View>
+
           <View style={styles.action}>
             <FontAwesome name="globe" color={theme.colors.primary} size={25} />
             <TextInput
@@ -228,8 +314,23 @@ const EditProfileScreen = ({navigation}) => {
               ]}
             />
           </View>
+          <View style={styles.action}>
+            <MaterialCommunityIcons
+              name="map-marker-outline"
+              color={theme.colors.primary}
+              size={20}
+            />
+            <TextInput
+              placeholder="City"
+              placeholderTextColor="#666666"
+              autoCorrect={false}
+              value={userData ? userData.city : ''}
+              onChangeText={txt => setUserData({...userData, city: txt})}
+              style={styles.textInput}
+            />
+          </View>
 
-          <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+          <TouchableOpacity style={styles.commandButton} onPress={handleUpdate}>
             <Text style={styles.panelButtonTitle}>Submit</Text>
           </TouchableOpacity>
         </Animated.View>
@@ -356,6 +457,9 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     marginRight: 15,
+  },
+  nameContainer: {
+    flexDirection: 'row',
   },
 });
 

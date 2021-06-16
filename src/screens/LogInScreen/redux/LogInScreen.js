@@ -70,8 +70,7 @@ const LogInScreen = ({navigation}) => {
     });
     if (response.error) {
       setError(response.error);
-    }
-    setLoading(false);
+    } else setLoading(false);
   };
   return (
     <View style={styles.container}>
@@ -129,7 +128,6 @@ const LogInScreen = ({navigation}) => {
             style={{width: 250, height: 60}}
             size={GoogleSigninButton.Size.Wide}
             onPress={_signIn}
-            onPressIn={navigation.navigate('BottomTabs')}
           />
         </View>
       </View>

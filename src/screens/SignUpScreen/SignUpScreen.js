@@ -46,16 +46,6 @@ export default function SignUpScreen({navigation}) {
     setRadioButtons(radioButtonsArray);
   }
 
-  const usersCollectionRef = firestore().collection('Users');
-
-  const adduser = () => {
-    usersCollectionRef.add({
-      name: name,
-      password: password,
-      email: email,
-    });
-  };
-
   const SignUp = async () => {
     const nameError = nameValidator(name.value);
     const emailError = emailValidator(email.value);
@@ -74,6 +64,8 @@ export default function SignUpScreen({navigation}) {
     });
     if (response.error) {
       setError(response.error);
+    } else {
+      navigation.navigate('BottomTabs');
     }
     setLoading(false);
   };
@@ -119,7 +111,7 @@ export default function SignUpScreen({navigation}) {
 
       <Text style={styles.gender}> Gender: </Text>
       <RadioGroup radioButtons={radioButtons} onPress={onPressRadioButton} />
-      <TouchableOpacity loading={loading} onPress={adduser} onPressIn={SignUp}>
+      <TouchableOpacity loading={loading} onPress={SignUp}>
         <View style={styles.login}>
           <Text style={styles.loginText}> SignUp </Text>
         </View>
