@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -20,9 +21,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import storage from '@react-native-firebase/storage';
 
 const EditProfileScreen = ({navigation}) => {
-  const [image, setImage] = useState(
-    'https://scontent.fhan3-1.fna.fbcdn.net/v/t1.6435-9/156101521_2001649893309778_2791937253516506491_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=PiNnXEcT4u4AX_I20BV&_nc_ht=scontent.fhan3-1.fna&oh=f25758afcff692bb9691cb2c63a18ea0&oe=60C7E299',
-  );
+  const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [userData, setUserData] = useState(null);
@@ -56,6 +55,7 @@ const EditProfileScreen = ({navigation}) => {
         dob: userData.dob,
         country: userData.country,
         city: userData.city,
+        userImg: imgUrl,
       })
       .then(() => {
         console.log('User Updated!');
@@ -229,105 +229,138 @@ const EditProfileScreen = ({navigation}) => {
                 }}>
                 <ImageBackground
                   source={{
-                    uri: image,
+                    uri: image
+                      ? image
+                      : userData
+                      ? userData.userImg ||
+                        'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg'
+                      : 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg',
                   }}
-                  style={{height: 150, width: 150}}
-                  imageStyle={{borderRadius: 75}}></ImageBackground>
+                  style={{height: 100, width: 100}}
+                  imageStyle={{borderRadius: 15}}>
+                  <View
+                    style={{
+                      flex: 1,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <MaterialCommunityIcons
+                      name="camera"
+                      size={35}
+                      color="#fff"
+                      style={{
+                        opacity: 0.7,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderWidth: 1,
+                        borderColor: '#fff',
+                        borderRadius: 10,
+                      }}
+                    />
+                  </View>
+                </ImageBackground>
               </View>
             </TouchableOpacity>
           </View>
+          <View style={styles.contain}>
+            <View style={styles.action}>
+              <FontAwesome
+                name="user-o"
+                color={theme.colors.secondary}
+                size={25}
+              />
+              <TextInput
+                placeholder="First Name"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                value={userData ? userData.name : ''}
+                onChangeText={txt => setUserData({...userData, name: txt})}
+                style={[
+                  styles.textInput,
+                  {
+                    color: theme.colors.TEXT,
+                  },
+                ]}
+              />
+            </View>
 
-          <View style={styles.action}>
-            <FontAwesome
-              name="user-o"
-              color={theme.colors.secondary}
-              size={25}
-            />
-            <TextInput
-              placeholder="First Name"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              value={userData ? userData.name : ''}
-              onChangeText={txt => setUserData({...userData, name: txt})}
-              style={[
-                styles.textInput,
-                {
-                  color: theme.colors.TEXT,
-                },
-              ]}
-            />
-          </View>
+            <View style={styles.action}>
+              <FontAwesome
+                name="phone"
+                color={theme.colors.secondary}
+                size={25}
+              />
+              <TextInput
+                placeholder="Phone Number"
+                placeholderTextColor="#666666"
+                keyboardType="number-pad"
+                autoCorrect={false}
+                value={userData ? userData.phone : ''}
+                onChangeText={txt => setUserData({...userData, phone: txt})}
+                style={[
+                  styles.textInput,
+                  {
+                    color: theme.colors.TEXT,
+                  },
+                ]}
+              />
+            </View>
+            <View style={styles.action}>
+              <FontAwesome
+                name="birthday-cake"
+                color={theme.colors.secondary}
+                size={25}
+              />
+              <TextInput
+                placeholder="Date of Birth"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                value={userData ? userData.dob : ''}
+                onChangeText={txt => setUserData({...userData, dob: txt})}
+                style={[
+                  styles.textInput,
+                  {
+                    color: theme.colors.TEXT,
+                  },
+                ]}
+              />
+            </View>
 
-          <View style={styles.action}>
-            <FontAwesome
-              name="phone"
-              color={theme.colors.secondary}
-              size={25}
-            />
-            <TextInput
-              placeholder="Phone Number"
-              placeholderTextColor="#666666"
-              keyboardType="number-pad"
-              autoCorrect={false}
-              value={userData ? userData.phone : ''}
-              onChangeText={txt => setUserData({...userData, phone: txt})}
-              style={[
-                styles.textInput,
-                {
-                  color: theme.colors.TEXT,
-                },
-              ]}
-            />
-          </View>
-          <View style={styles.action}>
-            <FontAwesome
-              name="birthday-cake"
-              color={theme.colors.secondary}
-              size={25}
-            />
-            <TextInput
-              placeholder="Date of Birth"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              value={userData ? userData.dob : ''}
-              onChangeText={txt => setUserData({...userData, dob: txt})}
-              style={[
-                styles.textInput,
-                {
-                  color: theme.colors.TEXT,
-                },
-              ]}
-            />
-          </View>
-
-          <View style={styles.action}>
-            <FontAwesome name="globe" color={theme.colors.primary} size={25} />
-            <TextInput
-              placeholder="Country"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              style={[
-                styles.textInput,
-                {
-                  color: theme.colors.TEXT,
-                },
-              ]}
-            />
-          </View>
-          <View style={styles.action}>
-            <MaterialCommunityIcons
-              name="map-marker-outline"
-              color={theme.colors.primary}
-              size={20}
-            />
-            <TextInput
-              placeholder="City"
-              placeholderTextColor="#666666"
-              autoCorrect={false}
-              value={userData ? userData.city : ''}
-              onChangeText={txt => setUserData({...userData, city: txt})}
-              style={styles.textInput}
-            />
+            <View style={styles.action}>
+              <FontAwesome
+                name="globe"
+                color={theme.colors.primary}
+                size={25}
+              />
+              <TextInput
+                placeholder="Country"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                value={userData ? userData.country : ''}
+                onChangeText={txt => setUserData({...userData, country: txt})}
+                style={[
+                  styles.textInput,
+                  {
+                    color: theme.colors.TEXT,
+                  },
+                ]}
+              />
+            </View>
+            <View style={styles.action}>
+              <MaterialCommunityIcons
+                name="map-marker-outline"
+                color={theme.colors.primary}
+                size={20}
+              />
+              <TextInput
+                placeholder="City"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                value={userData ? userData.city : ''}
+                onChangeText={txt => setUserData({...userData, city: txt})}
+                style={styles.textInput}
+              />
+            </View>
           </View>
 
           <TouchableOpacity style={styles.commandButton} onPress={handleUpdate}>
@@ -352,6 +385,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: theme.colors.secondary,
     alignItems: 'center',
+    height: 50,
   },
   ProfilePictureText: {
     fontSize: 25,
@@ -422,7 +456,7 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#f2f2f2',
@@ -437,7 +471,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === 'ios' ? 0 : -20,
+    marginTop: 0,
     paddingLeft: 10,
     color: '#05375a',
     fontSize: 20,
@@ -460,6 +494,9 @@ const styles = StyleSheet.create({
   },
   nameContainer: {
     flexDirection: 'row',
+  },
+  contain: {
+    marginTop: 20,
   },
 });
 

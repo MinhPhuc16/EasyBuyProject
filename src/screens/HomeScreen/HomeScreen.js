@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Btn} from '../../components/Btn';
@@ -82,6 +83,7 @@ const Home = connect(mapStateToProps, {
               <Text style={styles.categoryTitle} weight="bold">
                 Sale
               </Text>
+
               <Text style={styles.description}>Super Summer Sale</Text>
               <FlatList
                 horizontal

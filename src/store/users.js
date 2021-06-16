@@ -38,7 +38,6 @@ export const getCurrentUserData = () => async dispatch => {
       .collection('users')
       .doc(userUid)
       .onSnapshot(function (doc) {
-        console.log('Quang ngu', doc.data());
         dispatch(setCurrentUser(doc.data()));
       });
   } catch (e) {

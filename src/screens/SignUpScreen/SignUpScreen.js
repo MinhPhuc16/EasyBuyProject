@@ -15,24 +15,6 @@ import {emailValidator} from '../../validator/emailValidator';
 import {passwordValidator} from '../../validator/passwordValidator';
 import {nameValidator} from '../../validator/nameValidator';
 import firestore from '@react-native-firebase/firestore';
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel,
-} from 'react-native-simple-radio-button';
-import RadioGroup from 'react-native-radio-buttons-group';
-const radioButtonsData = [
-  {
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'Male',
-    value: 'male',
-  },
-  {
-    id: '2',
-    label: 'Female',
-    value: 'female',
-  },
-];
 
 export default function SignUpScreen({navigation}) {
   const [name, setName] = useState({value: '', error: ''});
@@ -40,11 +22,6 @@ export default function SignUpScreen({navigation}) {
   const [password, setPassword] = useState({value: '', error: ''});
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
-  const [radioButtons, setRadioButtons] = useState(radioButtonsData);
-
-  function onPressRadioButton(radioButtonsArray) {
-    setRadioButtons(radioButtonsArray);
-  }
 
   const SignUp = async () => {
     const nameError = nameValidator(name.value);
@@ -62,12 +39,12 @@ export default function SignUpScreen({navigation}) {
       email: email.value,
       password: password.value,
     });
-    if (response.error) {
-      setError(response.error);
-    } else {
-      navigation.navigate('BottomTabs');
-    }
-    setLoading(false);
+    // if (response.error) {
+    //   setError(response.error);
+    // } else {
+    //   navigation.navigate('BottomTabs');
+    // }
+    // setLoading(false);
   };
 
   return (
@@ -109,8 +86,6 @@ export default function SignUpScreen({navigation}) {
         />
       </View>
 
-      <Text style={styles.gender}> Gender: </Text>
-      <RadioGroup radioButtons={radioButtons} onPress={onPressRadioButton} />
       <TouchableOpacity loading={loading} onPress={SignUp}>
         <View style={styles.login}>
           <Text style={styles.loginText}> SignUp </Text>
@@ -133,7 +108,9 @@ const styles = StyleSheet.create({
   },
   Alreadyhaveaccount: {
     flexDirection: 'row',
-    marginTop: 5,
+    marginTop: 10,
+    alignItems: 'center',
+    alignSelf: 'center',
   },
   link: {
     fontWeight: 'bold',

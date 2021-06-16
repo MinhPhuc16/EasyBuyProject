@@ -4,7 +4,6 @@ import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import {SingleProductScreen} from '../screens/SingleProductScreen/SingleProductScreen';
 import {theme} from '../common/theme';
 import {RatingReviewScreen} from '../screens/RatingReviewScreen/RatingReviewScreen';
-import {Image, TextInputBase} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const {Navigator, Screen} = createStackNavigator();

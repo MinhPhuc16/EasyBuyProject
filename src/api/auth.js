@@ -359,7 +359,9 @@ export const getData = async (gender, category) => {
           'gender',
           gender === undefined ? 'in' : '==',
           gender === undefined ? ['men', 'women'] : gender,
+          x,
         );
+      console.log();
     } else {
       ref = firebase
         .firestore()

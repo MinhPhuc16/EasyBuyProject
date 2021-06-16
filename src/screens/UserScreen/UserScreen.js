@@ -65,11 +65,13 @@ const ProfileScreen = connect(mapStateToProps, {
       <View style={styles.userInfoSection}>
         <Image
           style={styles.avatar}
-          source={require('../../assets/images/Rose_2.png')}
+          source={{
+            uri: 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg',
+          }}
         />
         <View style={styles.text}>
           <Text weight={'bold'} style={styles.name}>
-            {user.username}
+            {user.name}
           </Text>
           <Text weight={'medium'} style={styles.email}>
             {user.email}
@@ -110,7 +112,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   email: {
-    color: theme.colors.GRAY,
+    color: theme.colors.TEXT,
     fontSize: 16,
     lineHeight: 20,
     marginBottom: 15,

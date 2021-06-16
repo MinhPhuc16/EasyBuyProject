@@ -40,7 +40,7 @@ const LogInScreen = ({navigation}) => {
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         // play services not available or outdated
       } else {
-        // some other error happened
+        navigation.navigate('BottomTabs');
       }
     }
   };
@@ -201,6 +201,11 @@ const styles = StyleSheet.create({
   noAccountText: {
     fontSize: 16,
     fontWeight: 'normal',
+  },
+  input: {
+    alignItems: 'center',
+    marginLeft: 10,
+    justifyContent: 'flex-start',
   },
 });
 
