@@ -100,7 +100,7 @@ export const OptionsStack = () => {
       />
       <Screen
         options={({navigation}) => ({
-          title: 'Payment Methods',
+          title: ' Your Favorites',
           headerLeft: () => (
             <TouchableOpacity>
               <AntDesign name="left" onPress={() => navigation.goBack()} />

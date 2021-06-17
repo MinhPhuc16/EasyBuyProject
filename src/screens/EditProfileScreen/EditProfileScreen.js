@@ -8,8 +8,9 @@ import {
   StyleSheet,
   ImageBackground,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -50,9 +51,9 @@ const EditProfileScreen = ({navigation}) => {
       .collection('users')
       .doc(user.uid)
       .update({
-        name: userData.name,
+        fname: userData.fname,
+        lname: userData.lname,
         phone: userData.phone,
-        dob: userData.dob,
         country: userData.country,
         city: userData.city,
         userImg: imgUrl,
@@ -103,10 +104,10 @@ const EditProfileScreen = ({navigation}) => {
       setUploading(false);
       setImage(null);
 
-      // Alert.alert(
-      //   'Image uploaded!',
-      //   'Your image has been uploaded to the Firebase Cloud Storage Successfully!',
-      // );
+      Alert.alert(
+        'Image uploaded!',
+        'Your image has been uploaded to the Firebase Cloud Storage Successfully!',
+      );
       return url;
     } catch (e) {
       console.log(e);
@@ -188,7 +189,7 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.nameContainer}>
           <Text style={styles.text}> Hello, </Text>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-            {userData ? userData.name : ''}
+            {userData ? userData.lname : ''}
           </Text>
         </View>
 
@@ -273,8 +274,28 @@ const EditProfileScreen = ({navigation}) => {
                 placeholder="First Name"
                 placeholderTextColor="#666666"
                 autoCorrect={false}
-                value={userData ? userData.name : ''}
-                onChangeText={txt => setUserData({...userData, name: txt})}
+                value={userData ? userData.fname : ''}
+                onChangeText={txt => setUserData({...userData, fname: txt})}
+                style={[
+                  styles.textInput,
+                  {
+                    color: theme.colors.TEXT,
+                  },
+                ]}
+              />
+            </View>
+            <View style={styles.action}>
+              <FontAwesome
+                name="user-o"
+                color={theme.colors.secondary}
+                size={25}
+              />
+              <TextInput
+                placeholder="Last Name"
+                placeholderTextColor="#666666"
+                autoCorrect={false}
+                value={userData ? userData.lname : ''}
+                onChangeText={txt => setUserData({...userData, lname: txt})}
                 style={[
                   styles.textInput,
                   {
@@ -297,26 +318,6 @@ const EditProfileScreen = ({navigation}) => {
                 autoCorrect={false}
                 value={userData ? userData.phone : ''}
                 onChangeText={txt => setUserData({...userData, phone: txt})}
-                style={[
-                  styles.textInput,
-                  {
-                    color: theme.colors.TEXT,
-                  },
-                ]}
-              />
-            </View>
-            <View style={styles.action}>
-              <FontAwesome
-                name="birthday-cake"
-                color={theme.colors.secondary}
-                size={25}
-              />
-              <TextInput
-                placeholder="Date of Birth"
-                placeholderTextColor="#666666"
-                autoCorrect={false}
-                value={userData ? userData.dob : ''}
-                onChangeText={txt => setUserData({...userData, dob: txt})}
                 style={[
                   styles.textInput,
                   {

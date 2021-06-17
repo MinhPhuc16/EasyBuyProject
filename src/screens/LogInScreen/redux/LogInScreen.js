@@ -68,9 +68,11 @@ const LogInScreen = ({navigation}) => {
       email: email.value,
       password: password.value,
     });
-    if (response.error) {
-      setError(response.error);
-    } else setLoading(false);
+    // if (response.error) {
+    //   setError(response.error);
+    // } else {
+    //   navigation.navigate('BottomTabs');
+    // }
   };
   return (
     <View style={styles.container}>

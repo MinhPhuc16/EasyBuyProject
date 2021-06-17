@@ -2,9 +2,24 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {theme} from '../../common/theme';
+import firestore from '@react-native-firebase/firestore';
 
 const LanguageScreen = ({navigation}) => {
-  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [selectedLanguage, setSelectedLanguage] = useState('');
+  const updateLanguage = async () => {
+    try {
+      await firestore()
+        .collection('users')
+        .doc('nXfZjCnGlMeAMUBffxsHVU8hQLx2')
+        .update({
+          language: selectedLanguage,
+        });
+      console.log('Hieu ngu nhu cho');
+      navigation.goBack();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.description}> Country/Language</Text>
@@ -33,7 +48,10 @@ const LanguageScreen = ({navigation}) => {
       </View>
 
       <View style={styles.Done}>
-        <TouchableOpacity onPress={() => navigation.navigate('OptionsScreen')}>
+        <TouchableOpacity
+          onPress={() => {
+            updateLanguage();
+          }}>
           <Text style={styles.text}> Done </Text>
         </TouchableOpacity>
       </View>

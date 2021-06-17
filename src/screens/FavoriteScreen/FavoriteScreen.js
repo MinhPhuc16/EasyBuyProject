@@ -74,7 +74,7 @@ export const FavoriteScreen = connect(mapStateToProps, {
                 <Btn
                   width={100}
                   height={30}
-                  bgColor={theme.colors.TEXT}
+                  bgColor={theme.colors.primary}
                   btnName={item}
                   titleStyle={{color: theme.colors.BACKGROUND}}
                   onPress={() => handleSortByCategory(item)}
@@ -119,10 +119,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: GLOBAL_STYLES.PADDING,
   },
   title: {
-    color: theme.colors.TEXT,
+    color: theme.colors.secondary,
     fontSize: 34,
     lineHeight: 34,
     margin: 20,
+    fontWeight: 'bold',
   },
   btn: {
     margin: 10,

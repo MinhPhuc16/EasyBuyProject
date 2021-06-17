@@ -40,7 +40,7 @@ export default function ResetPasswordScreen({navigation}) {
       <Logo />
       <Text style={styles.header}> Reset your password</Text>
       <Text style={styles.text}> Restore password to continue </Text>
-      <View>
+      <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
           placeholder="E-mail address"
@@ -54,11 +54,10 @@ export default function ResetPasswordScreen({navigation}) {
         />
       </View>
 
-      <TouchableOpacity
-        loading={loading}
-        onPress={sendResetPasswordEmail}
-        style={{marginTop: 16}}>
-        <Text>Send Instructions</Text>
+      <TouchableOpacity loading={loading} onPress={sendResetPasswordEmail}>
+        <View style={styles.login}>
+          <Text style={styles.loginText}>Send Instructions</Text>
+        </View>
       </TouchableOpacity>
       <Toast {...toast} onDismiss={() => setToast({value: '', type: ''})} />
     </View>
@@ -70,9 +69,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input: {
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: 8,
+    alignItems: 'center',
+    marginLeft: 10,
+    justifyContent: 'flex-start',
   },
   header: {
     marginTop: 20,
@@ -84,5 +83,28 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 8,
     marginLeft: 10,
+  },
+  TextInput: {
+    height: 30,
+    width: '90%',
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 8,
+  },
+  login: {
+    height: 40,
+    width: '80%',
+    alignSelf: 'center',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    borderRadius: 10,
+    backgroundColor: theme.colors.secondary,
+  },
+  loginText: {
+    fontSize: 20,
+    fontWeight: 'normal',
   },
 });

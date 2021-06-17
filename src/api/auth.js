@@ -15,8 +15,6 @@ export const signUpUser = async ({name, email, password}) => {
     await auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        //Once the user creation has happened successfully, we can add the currentUser into firestore
-        //with the appropriate details.
         firestore()
           .collection('users')
           .doc(auth().currentUser.uid)
@@ -26,7 +24,6 @@ export const signUpUser = async ({name, email, password}) => {
             createdAt: firestore.Timestamp.fromDate(new Date()),
             userImg: null,
           })
-          //ensure we catch any errors at this stage to advise us if something does go wrong
           .catch(error => {
             console.log(
               'Something went wrong with added user to firestore: ',
@@ -40,6 +37,9 @@ export const signUpUser = async ({name, email, password}) => {
       });
   } catch (e) {
     console.log(e);
+    return {
+      error: error.message,
+    };
   }
 };
 
@@ -62,6 +62,9 @@ export const loginUser = async ({email, password}) => {
       });
   } catch (error) {
     console.log('signIN error', error);
+    return {
+      error: error.message,
+    };
   }
 };
 

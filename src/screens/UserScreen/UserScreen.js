@@ -58,7 +58,7 @@ const ProfileScreen = connect(mapStateToProps, {
       <StatusBar />
       <View></View>
       <View style={styles.logoutWrapper}>
-        <Text weight={'bold'} style={styles.title}>
+        <Text fontWeight={'bold'} style={styles.title}>
           My Profile
         </Text>
       </View>
@@ -106,10 +106,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: GLOBAL_STYLES.PADDING,
   },
   title: {
-    color: theme.colors.TEXT,
+    color: theme.colors.secondary,
     fontSize: 34,
     marginVertical: 24,
     paddingTop: 30,
+    fontWeight: 'bold',
   },
   email: {
     color: theme.colors.TEXT,

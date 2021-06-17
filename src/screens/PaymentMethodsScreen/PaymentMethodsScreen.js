@@ -9,9 +9,25 @@ import {
 } from 'react-native';
 import {theme} from '../../common/theme';
 import {Picker} from '@react-native-picker/picker';
+import firestore from '@react-native-firebase/firestore';
 
 const PaymentMethodsScreen = ({navigation}) => {
-  const [selectedPayment, setSelectedPayment] = useState();
+  const [selectedPayment, setSelectedPayment] = useState('');
+  const payment = ['Viettelpay', 'Cash', 'Momo', 'VNPay'];
+  const updateMethod = async () => {
+    try {
+      await firestore()
+        .collection('users')
+        .doc('nXfZjCnGlMeAMUBffxsHVU8hQLx2')
+        .update({
+          paymentMethods: firestore.FieldValue.arrayUnion(selectedPayment),
+        });
+      console.log('Hieu ngu');
+      navigation.goBack();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.box}>
@@ -21,16 +37,22 @@ const PaymentMethodsScreen = ({navigation}) => {
           onValueChange={(itemValue, itemIndex) =>
             setSelectedPayment(itemValue)
           }>
-          <Picker.Item label="Cash" value="cash" />
+          {/* <Picker.Item label="Cash" value="cash" />
           <Picker.Item label="Momo" value="momo" />
           <Picker.Item label="Visa" value="visa" />
           <Picker.Item label="Airpay" value="airpay" />
           <Picker.Item label="VNPay" value="vnpay" />
-          <Picker.Item label="ViettelPay" value="viettelpay" />
+          <Picker.Item label="ViettelPay" value="viettelpay" /> */}
+          {payment.map((lmao, index) => (
+            <Picker.Item label={lmao} value={lmao} key={index} />
+          ))}
         </Picker>
       </View>
       <View style={styles.Done}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            updateMethod();
+          }}>
           <Text style={styles.text}> Done </Text>
         </TouchableOpacity>
       </View>

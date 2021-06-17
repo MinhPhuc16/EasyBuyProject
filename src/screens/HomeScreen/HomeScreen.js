@@ -193,10 +193,10 @@ const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontSize: 34,
-    color: theme.colors.TEXT,
+    color: theme.colors.secondary,
   },
   description: {
-    color: theme.colors.GRAY,
+    color: theme.colors.TEXT,
     fontSize: 11,
     marginBottom: 10,
   },
