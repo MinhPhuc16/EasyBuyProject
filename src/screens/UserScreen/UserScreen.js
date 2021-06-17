@@ -71,7 +71,8 @@ const ProfileScreen = connect(mapStateToProps, {
         />
         <View style={styles.text}>
           <Text weight={'bold'} style={styles.name}>
-            {user.name}
+            {user.fname}
+            {user.lname}
           </Text>
           <Text weight={'medium'} style={styles.email}>
             {user.email}

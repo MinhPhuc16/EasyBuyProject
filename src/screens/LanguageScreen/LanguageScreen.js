@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderWidth: 1,
     borderRadius: 5,
-    backgroundColor: theme.colors.GRAY,
+    backgroundColor: theme.colors.secondary,
   },
   Done: {
     height: 50,

@@ -215,7 +215,7 @@ export const Filters = ({navigation, route}) => {
             renderItem={({item, index}) => (
               <SizeContainer
                 onPress={() => handleSize(item.size, item.state, index)}
-                bgColor={item.state ? theme.colors.primary : null}
+                bgColor={item.state ? theme.colors.primary : theme.colors.GRAY}
                 borderWidth={item.state ? 0 : 0.4}
                 name={item.size}
                 width={40}

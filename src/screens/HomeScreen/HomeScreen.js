@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     bottom: 88,
     left: 15,
     width: 190,
-    color: theme.colors.TEXT,
+    color: theme.colors.BACKGROUND,
   },
   btn: {
     position: 'absolute',

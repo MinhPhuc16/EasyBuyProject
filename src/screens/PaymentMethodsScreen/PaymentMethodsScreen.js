@@ -13,7 +13,7 @@ import firestore from '@react-native-firebase/firestore';
 
 const PaymentMethodsScreen = ({navigation}) => {
   const [selectedPayment, setSelectedPayment] = useState('');
-  const payment = ['Viettelpay', 'Cash', 'Momo', 'VNPay'];
+  const payment = ['Viettelpay', 'Cash', 'Momo', 'VNPay', 'ShoppePay', 'Visa'];
   const updateMethod = async () => {
     try {
       await firestore()

@@ -39,12 +39,10 @@ export default function SignUpScreen({navigation}) {
       email: email.value,
       password: password.value,
     });
-    // if (response.error) {
-    //   setError(response.error);
-    // } else {
-    //   navigation.navigate('BottomTabs');
-    // }
-    // setLoading(false);
+    if (response.error) {
+      setError(response.error);
+    } else setLoading(false);
+    navigation.navigate('BottomTabs');
   };
 
   return (
@@ -108,7 +106,7 @@ const styles = StyleSheet.create({
   },
   Alreadyhaveaccount: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 8,
     alignItems: 'center',
     alignSelf: 'center',
   },

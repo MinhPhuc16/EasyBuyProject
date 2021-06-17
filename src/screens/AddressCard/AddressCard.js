@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: 140,
-    backgroundColor: theme.colors.DARK,
+    backgroundColor: theme.colors.primary,
     borderRadius: 8,
     padding: 20,
     marginBottom: 24,
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
 
   edit: {
-    color: theme.colors.primary,
+    color: theme.colors.TEXT,
+    fontWeight: 'bold',
   },
 });

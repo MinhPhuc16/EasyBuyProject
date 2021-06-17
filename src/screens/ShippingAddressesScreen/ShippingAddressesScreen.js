@@ -1,11 +1,19 @@
 import React from 'react';
-import {View, StyleSheet, FlatList, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {AddressCard} from '../AddressCard/AddressCard';
 import {theme} from '../../common/theme';
 import {GLOBAL_STYLES} from '../../common/globalStyles';
 import {connect} from 'react-redux';
 import {selectCurrentUserShippingAddresses} from '../../store/users';
 import {selectShippingAddress} from '../../api/auth';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const mapStateToProps = state => ({
   shippingAddresses: selectCurrentUserShippingAddresses(state),
@@ -43,12 +51,18 @@ export const ShippingAddressesScreen = connect(
       ) : (
         <Text> You have not added any shipping addresses yet </Text>
       )}
-
-      <Image
-        source={require('../../assets/images/Rose_2.png')}
-        style={{alignSelf: 'flex-end', backgroundColor: theme.colors.DARK}}
-        onPress={() => navigation.navigate('AddingShippingAddress')}
-      />
+      <TouchableOpacity
+        onPress={() => navigation.navigate('AddingShippingAddress')}>
+        <AntDesign
+          name="right"
+          size={20}
+          style={{
+            alignSelf: 'flex-end',
+            backgroundColor: theme.colors.secondary,
+            color: theme.colors.BACKGROUND,
+          }}
+        />
+      </TouchableOpacity>
     </View>
   );
 });

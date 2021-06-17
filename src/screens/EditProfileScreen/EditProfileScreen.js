@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
   Alert,
+  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
