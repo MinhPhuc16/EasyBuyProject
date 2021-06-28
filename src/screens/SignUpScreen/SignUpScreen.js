@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   ImageBackground,
+  SafeAreaView,
 } from 'react-native';
 import {signUpUser} from '../../api/auth';
 import Logo from '../../components/Logo';
@@ -46,14 +47,14 @@ export default function SignUpScreen({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Logo />
       <Text style={styles.header}> Create account</Text>
-      <Text style={styles.text}> Sign in to get started </Text>
+      <Text style={styles.text}> Sign up to get started </Text>
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="    Name"
+          placeholder="Name"
           value={name.value}
           onChangeText={text => setName({value: text, error: ''})}
           error={!!name.error}
@@ -63,7 +64,7 @@ export default function SignUpScreen({navigation}) {
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="    Email"
+          placeholder="Email"
           value={email.value}
           onChangeText={text => setEmail({value: text, error: ''})}
           error={!!email.error}
@@ -75,7 +76,7 @@ export default function SignUpScreen({navigation}) {
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="    Password"
+          placeholder="Password"
           value={password.value}
           onChangeText={text => setPassword({value: text, error: ''})}
           error={!!password.error}
@@ -90,13 +91,13 @@ export default function SignUpScreen({navigation}) {
         </View>
       </TouchableOpacity>
       <View style={styles.Alreadyhaveaccount}>
-        <Text>Already have an account? </Text>
+        <Text style={styles.noAccountText}>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('LogInScreen')}>
           <Text style={styles.link}>LogIn</Text>
         </TouchableOpacity>
       </View>
       <Toast message={error} onDismiss={() => setError('')} />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -109,10 +110,12 @@ const styles = StyleSheet.create({
     marginTop: 8,
     alignItems: 'center',
     alignSelf: 'center',
+    fontSize: 16,
   },
   link: {
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    color: theme.colors.secondary,
+    fontSize: 16,
   },
   text: {
     fontSize: 20,
@@ -132,6 +135,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginTop: 8,
+    justifyContent: 'center',
   },
   input: {
     alignItems: 'center',
@@ -155,6 +159,10 @@ const styles = StyleSheet.create({
   },
   loginText: {
     fontSize: 20,
+    fontWeight: 'normal',
+  },
+  noAccountText: {
+    fontSize: 16,
     fontWeight: 'normal',
   },
 });

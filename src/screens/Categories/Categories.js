@@ -10,29 +10,29 @@ export const Categories = ({navigation}) => {
     {
       categoryName: 'New',
       imageSrc:
-        'https://image.thanhnien.vn/1024/uploaded/trangpth/2021_01_25/rose_qnem.jpg',
+        'https://images.unsplash.com/photo-1525845859779-54d477ff291f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
     },
     {
       categoryName: 'Clothes',
       imageSrc:
-        'https://image.thanhnien.vn/1024/uploaded/trangpth/2021_01_25/rose_qnem.jpg',
+        'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80',
     },
     {
       categoryName: 'Shoes',
       imageSrc:
-        'https://image.thanhnien.vn/1024/uploaded/trangpth/2021_01_25/rose_qnem.jpg',
+        'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
     },
     {
       categoryName: 'Bags',
       imageSrc:
-        'https://image.thanhnien.vn/1024/uploaded/trangpth/2021_01_25/rose_qnem.jpg',
+        'https://images.unsplash.com/photo-1527385352018-3c26dd6c3916?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
     },
   ];
   const categoriesMan = [
     {
       categoryName: 'New',
       imageSrc:
-        'https://image.thanhnien.vn/1024/uploaded/trangpth/2021_01_25/rose_qnem.jpg',
+        'https://images.unsplash.com/photo-1527385352018-3c26dd6c3916?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80',
     },
     {
       categoryName: 'Clothes',

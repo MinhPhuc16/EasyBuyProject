@@ -1,15 +1,14 @@
 import React from 'react';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {AnimatedTabBarNavigator} from 'react-native-animated-nav-tab-bar';
 import {Image} from 'react-native';
 import {CartScreen} from '../screens/CartScreen/CartScreen';
 import {HomeStack} from '../navigation/HomeStack';
 import {UserStack} from '../navigation/UserStack';
 import {ShopStack} from '../navigation/ShopStack';
-
 import {OptionsStack} from '../navigation/OptionsStack';
 
-const Tab = createBottomTabNavigator();
+const Tab = AnimatedTabBarNavigator();
 
 const BottomTabs = () => {
   return (
@@ -63,6 +62,7 @@ const BottomTabs = () => {
           ),
         }}
       />
+
       <Tab.Screen
         name="CartScreen"
         component={CartScreen}

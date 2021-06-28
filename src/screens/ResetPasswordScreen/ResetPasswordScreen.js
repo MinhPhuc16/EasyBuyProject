@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  SafeAreaView,
 } from 'react-native';
 import Logo from '../../components/Logo';
 import {emailValidator} from '../../validator/emailValidator';
@@ -36,7 +37,7 @@ export default function ResetPasswordScreen({navigation}) {
     setLoading(false);
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Logo />
       <Text style={styles.header}> Reset your password</Text>
       <Text style={styles.text}> Restore password to continue </Text>
@@ -60,7 +61,7 @@ export default function ResetPasswordScreen({navigation}) {
         </View>
       </TouchableOpacity>
       <Toast {...toast} onDismiss={() => setToast({value: '', type: ''})} />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginTop: 8,
+    justifyContent: 'center',
   },
   login: {
     height: 40,

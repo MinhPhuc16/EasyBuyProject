@@ -7,6 +7,7 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Btn} from '../../components/Btn';
@@ -72,93 +73,96 @@ const Home = connect(mapStateToProps, {
     }, []);
 
     return (
-      <ScrollView style={styles.container}>
-        {showSale ? (
-          <>
-            <Image
-              source={require('../../assets/images/Rosee.jpeg')}
-              style={{width: '100%', height: 196}}
-            />
-            <View style={styles.newItemsWrap}>
-              <Text style={styles.categoryTitle} weight="bold">
-                Sale
-              </Text>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          {showSale ? (
+            <>
+              <Image
+                source={require('../../assets/images/Rosee.jpeg')}
+                style={{width: '100%', height: 196}}
+              />
+              <View style={styles.newItemsWrap}>
+                <Text style={styles.categoryTitle} weight="bold">
+                  Sale
+                </Text>
 
-              <Text style={styles.description}>Super Summer Sale</Text>
-              <FlatList
-                horizontal
-                contentContainerStyle={{
-                  paddingTop: 15,
-                }}
-                data={saleProducts}
-                renderItem={({item}) => (
-                  <ProductCard
-                    product={item}
-                    isOnSale={true}
-                    isInCatalog={true}
-                    navigation={navigation}
-                    onPress={() =>
-                      navigation.navigate('SingleProductScreen', {
-                        product: item,
-                        products: saleProducts.filter(
-                          product => product.categoryName === item.categoryName,
-                        ),
-                      })
-                    }
-                  />
-                )}
-                keyExtractor={item => item.productType}
+                <Text style={styles.description}>Super Summer Sale</Text>
+                <FlatList
+                  horizontal
+                  contentContainerStyle={{
+                    paddingTop: 15,
+                  }}
+                  data={saleProducts}
+                  renderItem={({item}) => (
+                    <ProductCard
+                      product={item}
+                      isOnSale={true}
+                      isInCatalog={true}
+                      navigation={navigation}
+                      onPress={() =>
+                        navigation.navigate('SingleProductScreen', {
+                          product: item,
+                          products: saleProducts.filter(
+                            product =>
+                              product.categoryName === item.categoryName,
+                          ),
+                        })
+                      }
+                    />
+                  )}
+                  keyExtractor={item => item.productType}
+                />
+              </View>
+            </>
+          ) : (
+            <View style={styles.imageWrapper}>
+              <Image
+                source={require('../../assets/images/Rosee.jpeg')}
+                style={{width: '100%', height: 480}}
               />
+              <Text style={styles.title}>Fashion sale</Text>
+              <View style={styles.btn}>
+                <Btn
+                  btnName="Check"
+                  bgColor={theme.colors.primary}
+                  height={36}
+                  width={160}
+                  onPress={() => handleOnSaleProducts()}
+                />
+              </View>
             </View>
-          </>
-        ) : (
-          <View style={styles.imageWrapper}>
-            <Image
-              source={require('../../assets/images/Rosee.jpeg')}
-              style={{width: '100%', height: 480}}
+          )}
+          <View style={styles.newItemsWrap}>
+            <Text style={styles.categoryTitle}>New</Text>
+            <Text style={styles.description}>You've never seen it before</Text>
+
+            <FlatList
+              horizontal
+              contentContainerStyle={{
+                paddingTop: 15,
+              }}
+              data={newProducts}
+              renderItem={({item}) => (
+                <ProductCard
+                  product={item}
+                  isNew={true}
+                  isInCatalog={true}
+                  navigation={navigation}
+                  onPress={() =>
+                    navigation.navigate('SingleProductScreen', {
+                      product: item,
+                      products: newProducts.filter(
+                        product => product.categoryName === item.categoryName,
+                      ),
+                    })
+                  }
+                />
+              )}
+              keyExtractor={item => item.id}
             />
-            <Text style={styles.title}>Fashion sale</Text>
-            <View style={styles.btn}>
-              <Btn
-                btnName="Check"
-                bgColor={theme.colors.primary}
-                height={36}
-                width={160}
-                onPress={() => handleOnSaleProducts()}
-              />
-            </View>
           </View>
-        )}
-        <View style={styles.newItemsWrap}>
-          <Text style={styles.categoryTitle}>New</Text>
-          <Text style={styles.description}>You've never seen it before</Text>
-
-          <FlatList
-            horizontal
-            contentContainerStyle={{
-              paddingTop: 15,
-            }}
-            data={newProducts}
-            renderItem={({item}) => (
-              <ProductCard
-                product={item}
-                isNew={true}
-                isInCatalog={true}
-                navigation={navigation}
-                onPress={() =>
-                  navigation.navigate('SingleProductScreen', {
-                    product: item,
-                    products: newProducts.filter(
-                      product => product.categoryName === item.categoryName,
-                    ),
-                  })
-                }
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     );
   },
 );

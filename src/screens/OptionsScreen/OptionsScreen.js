@@ -1,11 +1,21 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {logoutUser} from '../../api/auth';
+import {TapGestureHandler, State} from 'react-native-gesture-handler';
 
 export default function OptionsScreen({navigation}) {
+  const _onDoubleTap = () => {
+    navigation.navigate('BottomTabs');
+  };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <LinearGradient
         colors={['#ffaf65', '#e5e5e5']}
         style={styles.linearGradient}>
@@ -45,7 +55,7 @@ export default function OptionsScreen({navigation}) {
           </TouchableOpacity>
         </View>
       </LinearGradient>
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -56,7 +56,6 @@ const ProfileScreen = connect(mapStateToProps, {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <View></View>
       <View style={styles.logoutWrapper}>
         <Text fontWeight={'bold'} style={styles.title}>
           My Profile

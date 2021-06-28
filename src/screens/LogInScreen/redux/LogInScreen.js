@@ -6,6 +6,7 @@ import {
   Button,
   TextInput,
   StyleSheet,
+  SafeAreaView,
 } from 'react-native';
 import {loginUser} from '../../../api/auth';
 import Logo from '../../../components/Logo';
@@ -74,14 +75,14 @@ const LogInScreen = ({navigation}) => {
     navigation.navigate('BottomTabs');
   };
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Logo />
       <Text style={styles.header}> Welcome</Text>
       <Text style={styles.text}> Sign in to continue </Text>
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="   Email"
+          placeholder="Email"
           value={email.value}
           onChangeText={text => setEmail({value: text, error: ''})}
           error={!!email.error}
@@ -94,7 +95,7 @@ const LogInScreen = ({navigation}) => {
       <View style={styles.TextInput}>
         <TextInput
           style={styles.input}
-          placeholder="   Password"
+          placeholder="Password"
           value={password.value}
           onChangeText={text => setPassword({value: text, error: ''})}
           error={!!password.error}
@@ -132,7 +133,7 @@ const LogInScreen = ({navigation}) => {
           />
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   forgot: {
     fontSize: 20,
     color: theme.colors.secondary,
-    marginTop: 6,
+    marginTop: 10,
   },
   link: {
     fontWeight: 'bold',
@@ -168,6 +169,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     marginTop: 8,
+    justifyContent: 'center',
   },
   header: {
     marginTop: 20,
@@ -181,7 +183,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    marginTop: 8,
     marginLeft: 10,
   },
   login: {
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
   input: {
     alignItems: 'center',
     marginLeft: 10,
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
 });
 
